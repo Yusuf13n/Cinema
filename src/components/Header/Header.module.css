@@ -1,7 +1,5 @@
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  background-color: rgb(165, 173, 165);
   padding: 20px 50px;
   position: sticky;
   backdrop-filter: blur(10px);
@@ -9,10 +7,10 @@
   z-index: 1000;
 }
 
-.headerCenter {
+.headerNav {
   flex: 1;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .navList {
