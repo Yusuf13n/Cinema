@@ -1,0 +1,233 @@
+.carousel {
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.5s; 
+  }
+  .carousel .list {
+    height: 100%;
+    margin: 0px auto;
+    display: flex;
+    position: relative;
+    transition: transform 0.5s;
+  }
+  
+  .carousel .item {
+    flex-shrink: 0;
+    width: 100%;
+    position: absolute;
+    opacity: 0;
+    transition: transform 0.5s, opacity 0.5s;
+  }
+  
+  .carousel .item.active {
+    position: relative;
+    opacity: 1;
+  }
+  
+  .carousel .item figure {
+    position: absolute;
+    width: 100%;
+  }
+  
+  .carousel .item figure img {
+    width: 100%;
+  }
+  
+  .carousel .item .content {
+    position: absolute;
+    right: 150px;
+    top: 45%;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .carousel .item .category {
+    font-weight: 500;
+  }
+  
+  .carousel .item h2 {
+    font-family: "League Gothic", sans-serif;
+    font-size: 8vw;
+    line-height: 1em;
+  }
+  
+  .carousel .item .description {
+    color: #fff8;
+    text-align: right;
+    max-width: 400px;
+  }
+  
+  .carousel .item .more {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .carousel .item .more button {
+    border: none;
+    border-radius: 30px;
+    padding: 10px 20px;
+    cursor: pointer;
+    text-transform: uppercase;
+    background-color: rgb(210, 210, 210);
+    transition: 0.4s ease;
+  }
+  .carousel .item .more button:hover {
+      opacity: 0.7;
+  }
+  
+  .btnMore a {
+    text-decoration: none;
+  }
+  
+  .carousel .arrows {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    top: 42%;
+    transform: translateY(-50%);
+  }
+  
+  .carousel .arrows button {
+    background: transparent;
+    border: 1px solid black;
+    color: black;
+    border-radius: 50%;
+    margin: 0px 70px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+  }
+  
+  .carousel .indicators {
+    position: absolute;
+    bottom: 40px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .carousel .indicators .number {
+    font-family: "League Gothic", sans-serif;
+    font-size: 3em;
+  }
+  
+  .carousel .indicators ul {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .carousel .indicators li {
+    width: 50px;
+    height: 5px;
+    background-color: #608fc7;
+    border-radius: 10px;
+    list-style: none;
+    cursor: pointer;
+    transition: 0.5s;
+  }
+  
+  .carousel .indicators li.active {
+    background-color: rgb(181, 59, 126);
+    /* background-color: linear-gradient(45deg, #6e2784, #131313); */
+  }
+  
+  
+  
+  @media (max-width: 1200px) {
+    .carousel .item figure {
+      width: 60%;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  
+    .carousel .item h2 {
+      font-size: 6vw; 
+    }
+  
+    .carousel .item .content {
+      right: 100px;
+      width: 60%;
+    }
+  
+    .carousel .item .description {
+      max-width: 350px;
+    }
+  
+    .carousel .arrows button {
+      width: 45px;
+      height: 45px;
+    }
+  
+    .carousel .indicators li {
+      width: 40px;
+      height: 4px;
+    }
+  }
+  
+  
+  @media (max-width: 900px) {
+    .carousel .item figure {
+      width: 50%;
+    }
+  
+    .carousel .item h2 {
+      font-size: 7vw;
+    }
+  
+    .carousel .item .content {
+      right: 60px;
+      width: 55%;
+    }
+  
+    .carousel .item .description {
+      max-width: 300px;
+    }
+  
+    .carousel .arrows button {
+      width: 40px;
+      height: 40px;
+    }
+  
+    .carousel .indicators li {
+      width: 35px;
+      height: 4px;
+    }
+  }
+  
+  
+  @media (max-width: 600px) {
+    .carousel .item figure {
+      width: 100%;
+      top: 30%;
+      transform: translateY(-30%);
+    }
+  
+    .carousel .item h2 {
+      font-size: 8vw;
+    }
+  
+    .carousel .item .content {
+      right: 20px;
+      width: 70%;
+    }
+  
+    .carousel .item .description {
+      max-width: 280px;
+    }
+  
+    .carousel .arrows button {
+      width: 35px;
+      height: 35px;
+    }
+  
+    .carousel .indicators li {
+      width: 30px;
+      height: 3px;
+    }
+  }

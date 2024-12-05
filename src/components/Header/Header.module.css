@@ -1,16 +1,17 @@
 .header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 20px 50px;
-  position: sticky;
-  backdrop-filter: blur(10px);
-  top: 0;
+  background-color: bisque;
+  border-radius: 10px;
+  position: absolute;
+  top: 40px;
+  left: 43%;
   z-index: 1000;
 }
 
 .headerCenter {
-  flex: 1;
   display: flex;
   justify-content: center;
 }
@@ -19,5 +20,10 @@
   display: flex;
   align-items: center;
   list-style: none;
+  text-decoration: none;
   gap: 60px;
+}
+.navList a {
+  text-decoration: none;
+  color: black;
 }
