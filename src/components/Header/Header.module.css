@@ -1,7 +1,5 @@
 .header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background-color: rgb(165, 173, 165);
   padding: 20px 50px;
   background-color: bisque;
   border-radius: 10px;
@@ -13,7 +11,7 @@
 
 .headerCenter {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .navList {

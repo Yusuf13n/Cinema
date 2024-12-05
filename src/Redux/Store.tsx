@@ -1,10 +1,13 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import HomeSlice from "./Slices/HomeSlice";
 import { filmsReducer } from "./Slices/FilmsSlice";
+import { authReducer } from './Slices/authSlice';
+
 
 const rootReducer = combineReducers({
   films: filmsReducer,
   HomeSlice,
+  auth: authReducer
 });
 
 export const store = configureStore({
