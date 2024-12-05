@@ -13,11 +13,7 @@ export const Header = () => {
   return (
     <header className={style.header}>
 
-      <div className={style.headerNav}>
-          <div>
-            Меню
-          </div>
-
+      <div className={style.headerCenter}>
           <ul className={style.navList}>
             <li>
               <Link to="/">Home</Link>
