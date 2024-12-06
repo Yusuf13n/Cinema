@@ -1,7 +1,8 @@
 .carousel {
-    height: 100vh;
+    height: 50vh;
     position: relative;
     overflow: hidden;
+    filter: brightness(10px);
     transition: background-color 0.5s; 
   }
   .carousel .list {
@@ -36,8 +37,8 @@
   
   .carousel .item .content {
     position: absolute;
-    right: 150px;
-    top: 45%;
+    right: 170px;
+    top: 50%;
     width: 70%;
     display: flex;
     flex-direction: column;
@@ -52,7 +53,7 @@
   
   .carousel .item h2 {
     font-family: "League Gothic", sans-serif;
-    font-size: 8vw;
+    font-size: 82px;
     line-height: 1em;
   }
   
@@ -134,7 +135,6 @@
   
   .carousel .indicators li.active {
     background-color: rgb(181, 59, 126);
-    /* background-color: linear-gradient(45deg, #6e2784, #131313); */
   }
   
   

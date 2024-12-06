@@ -17,12 +17,7 @@
   height: 100%;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.card:hover {
-  /* transform: scale(1.02); */
-  box-shadow: 0 8px 16px rgba(66, 66, 66, 0.2);
+  cursor: pointer;
 }
 
 .image {
@@ -30,6 +25,10 @@
   height: 100%;
   object-fit: cover;
   border-radius: 3px;
+  transition: transform 0.4s ease;
+}
+.image:hover {
+  transform: scale(1.01);
 }
 
 .infoBlock {

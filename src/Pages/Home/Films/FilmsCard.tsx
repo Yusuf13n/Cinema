@@ -2,15 +2,21 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../Hooks";
 import { fetchItems } from "../../../Redux/Slices/FilmsSlice";
 import style from "./Films.module.css";
+import { useNavigate } from "react-router-dom";
 
 export const FilmsCard = () => {
   const films = useAppSelector((state) => state.films.films);
   const loading = useAppSelector((state) => state.films.loading);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchItems());
   }, [dispatch]);
+
+  const handleCardClick = (id: number) => {
+    navigate(`/film/${id}`);
+  };
 
   return (
     <div className={style.container}>
@@ -19,7 +25,11 @@ export const FilmsCard = () => {
       ) : (
         <ul className={style.cardList}>
           {films.map((film) => (
-            <li key={film.id} className={style.card}>
+            <li
+              key={film.id}
+              className={style.card}
+              onClick={() => handleCardClick(film.id)}
+            >
               <img
                 src={film.imageUrl}
                 alt={film.title}

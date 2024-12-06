@@ -4,12 +4,15 @@ interface ItemsFetch {
   id: number;
   title: string;
   imageUrl: string;
+  srcVideo: string;
   rating: number;
+  data: string;
+  description: string;
 }
 
 interface State {
   films: ItemsFetch[];
-  loading: boolean,
+  loading: boolean;
 }
 
 export const fetchItems = createAsyncThunk<ItemsFetch[]>(
@@ -34,13 +37,13 @@ const filmsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-    .addCase(fetchItems.pending, (state) => {
+      .addCase(fetchItems.pending, (state) => {
         state.loading = true;
-    })
-    .addCase(fetchItems.fulfilled, (state, action) => {
+      })
+      .addCase(fetchItems.fulfilled, (state, action) => {
         state.films = action.payload;
         state.loading = false;
-    })
+      });
   },
 });
 

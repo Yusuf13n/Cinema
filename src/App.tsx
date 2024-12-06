@@ -1,7 +1,6 @@
 import { Header } from "./components/Header/Header";
-import { Footer } from "./components/Footer/Footer";
 import { Router } from "./Pages/Router/Router";
-import { FilmsCard } from "./Pages/Home/Films/FilmsCard";
+import { Footer } from "./components/Footer/Footer";
 
 export const App = () => {
   return (

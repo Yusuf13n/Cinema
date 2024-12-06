@@ -17,13 +17,13 @@ const initialState: CarouselState = {
   items: [
     {
       id: 1,
-      title: "Mоана 2",
+      title: "Moana 2",
       description: "Nike combines style, comfort, and innovation for every step.",
       image: Moana,
     },
     {
       id: 2,
-      title: "Mоана 2",
+      title: "Moana 2",
       description: "Nike shoes enhance your workout and everyday moves with cutting-edge design.",
       image: Moana,
     },
