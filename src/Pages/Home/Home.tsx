@@ -11,6 +11,7 @@ import { RootState } from "../../Redux/Store";
 import { setActiveSlide } from "../../Redux/Slices/HomeSlice";
 
 import style from "./Home.module.css";
+import { FilmsCard } from "../../components/Films/FilmsCard";
 
 export const Home: React.FC = () => {
   const dispatch = useDispatch();
@@ -36,53 +37,58 @@ export const Home: React.FC = () => {
   }, [activeSlide]);
 
   return (
-    <section className={style.carousel}>
-      <div className={style.list}>
-        {items.map((item, index) => (
-          <div
-            key={item.id}
-            className={`${style.item} ${
-              index === activeSlide ? style.active : ""
-            }`}
-            style={{ transform: `translateX(${100 * (index - activeSlide)}%)` }}
-          >
-            <figure>
-              <img src={item.image} alt={item.title} />
-            </figure>
-            <div className={style.content}>
-              <h2>{item.title}</h2>
-              <p className={style.description}>{item.description}</p>
-              <div className={style.more}>
-                <button>Add To Cart</button>
-                <button className={style.btnMore}>
-                  <Link to="">
-                    <FontAwesomeIcon icon={faPlay} /> See More
-                  </Link>
-                </button>
+    <div>
+      <section className={style.carousel}>
+        <div className={style.list}>
+          {items.map((item, index) => (
+            <div
+              key={item.id}
+              className={`${style.item} ${
+                index === activeSlide ? style.active : ""
+              }`}
+              style={{
+                transform: `translateX(${100 * (index - activeSlide)}%)`,
+              }}
+            >
+              <figure>
+                <img src={item.image} alt={item.title} />
+              </figure>
+              <div className={style.content}>
+                <h2>{item.title}</h2>
+                <p className={style.description}>{item.description}</p>
+                <div className={style.more}>
+                  <button>Add To Cart</button>
+                  <button className={style.btnMore}>
+                    <Link to="">
+                      <FontAwesomeIcon icon={faPlay} /> See More
+                    </Link>
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
-      <div className={style.arrows}>
-        <button id="prev" onClick={prevSlide}>
-          <FontAwesomeIcon icon={faChevronLeft} />
-        </button>
-        <button id="next" onClick={nextSlide}>
-          <FontAwesomeIcon icon={faChevronRight} />
-        </button>
-      </div>
-      <div className={style.indicators}>
-        <ul>
-          {items.map((_, index) => (
-            <li
-              key={index}
-              className={index === activeSlide ? style.active : ""}
-              onClick={() => selectSlide(index)}
-            ></li>
           ))}
-        </ul>
-      </div>
-    </section>
+        </div>
+        <div className={style.arrows}>
+          <button id="prev" onClick={prevSlide}>
+            <FontAwesomeIcon icon={faChevronLeft} />
+          </button>
+          <button id="next" onClick={nextSlide}>
+            <FontAwesomeIcon icon={faChevronRight} />
+          </button>
+        </div>
+        <div className={style.indicators}>
+          <ul>
+            {items.map((_, index) => (
+              <li
+                key={index}
+                className={index === activeSlide ? style.active : ""}
+                onClick={() => selectSlide(index)}
+              ></li>
+            ))}
+          </ul>
+        </div>
+      </section>
+      <FilmsCard />
+    </div>
   );
 };
