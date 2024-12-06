@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../Hooks";
-import { fetchItems } from "../../Redux/Slices/FilmsSlice";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../../Hooks";
+import { fetchItems } from "../../../Redux/Slices/FilmsSlice";
 import style from "./Films.module.css";
 
 export const FilmsCard = () => {
