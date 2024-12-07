@@ -21,7 +21,7 @@ export const FilmsCard = () => {
   return (
     <div className={style.container}>
       {loading ? (
-        <p>Loading...</p>
+        <p className={style.loading}>Loading...</p>
       ) : (
         <ul className={style.cardList}>
           {films.map((film) => (
