@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../Hooks";
-import { fetchItems } from "../../Redux/Slices/FilmsSlice";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../../Hooks";
+import { fetchItems } from "../../../Redux/Slices/FilmsSlice";
 import style from "./Films.module.css";
 import { useNavigate } from "react-router-dom";
 
@@ -21,7 +21,7 @@ export const FilmsCard = () => {
   return (
     <div className={style.container}>
       {loading ? (
-        <p>Loading...</p>
+        <p className={style.loading}>Loading...</p>
       ) : (
         <ul className={style.cardList}>
           {films.map((film) => (
