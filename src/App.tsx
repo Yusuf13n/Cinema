@@ -7,7 +7,7 @@ export const App = () => {
     <div>
       <Header />
       <Router />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

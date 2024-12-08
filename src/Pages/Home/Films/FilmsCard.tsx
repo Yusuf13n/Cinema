@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../Hooks";
 import { fetchItems } from "../../../Redux/Slices/FilmsSlice";
-import style from "./Films.module.css";
 import { useNavigate } from "react-router-dom";
+import style from "./Films.module.css";
 
 export const FilmsCard = () => {
   const films = useAppSelector((state) => state.films.films);

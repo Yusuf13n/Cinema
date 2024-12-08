@@ -1,0 +1,109 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.formBlock {
+  backdrop-filter: blur(10px);
+  padding: 60px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.577);
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+h1 {
+  text-align: center;
+  color: #cbcbcb;
+  letter-spacing: 1px;
+  margin-bottom: 40px;
+}
+
+.inputGroup {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  background: #f9f9f9;
+}
+
+.input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  padding: 10px;
+  background: none;
+  color: #333;
+}
+
+.icon {
+  margin-right: 10px;
+  color: #666;
+}
+
+.btnWrapper {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.btn {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  letter-spacing: 1px;
+  color: white;
+  background-color: #2575fc;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn:disabled {
+  background-color: #b0c4de;
+}
+
+.btn:hover {
+  background-color: #1b5fd8;
+}
+
+.switchText {
+  text-align: center;
+  color: #666;
+  margin-top: 15px;
+}
+
+.switchText span {
+  color: #2575fc;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.switchText span:hover {
+  text-decoration: underline;
+}
+
+.errorText {
+  text-align: center;
+  color: red;
+  margin-top: 15px;
+}

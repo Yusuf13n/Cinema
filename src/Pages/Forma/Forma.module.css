@@ -1,6 +1,6 @@
 .containerForm {
   display: flex;
-  height: 100vh;
+  margin: 100px auto;
   justify-content: center;
   align-items: center;
 }
