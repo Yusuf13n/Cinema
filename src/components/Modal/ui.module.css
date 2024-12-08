@@ -1,0 +1,65 @@
+/* BookingModal.module.css */
+.containerModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 600px;
+  text-align: center;
+}
+
+.seatingChart {
+  margin: 20px 0;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 400px;
+  margin: 10px 0;
+}
+
+.seat {
+  padding: 10px;
+  margin: 5px;
+  width: 40px;
+  background-color: #f0f0f0;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 4px;
+}
+
+.seat:hover {
+  background-color: #d0d0d0;
+}
+
+.selected {
+  background-color: #00ff00; /* Зеленый для выбранных мест */
+}
+
+.bookButton {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.bookButton:hover {
+  background-color: #0056b3;
+}

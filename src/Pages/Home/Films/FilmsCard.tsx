@@ -4,7 +4,13 @@ import { fetchItems } from "../../../Redux/Slices/FilmsSlice";
 import { useNavigate } from "react-router-dom";
 import style from "./Films.module.css";
 
-export const FilmsCard = () => {
+interface handleOpenProps {
+  handleOpen: () => void
+}
+
+export const FilmsCard = ({handleOpen}: handleOpenProps) => {
+
+
   const films = useAppSelector((state) => state.films.films);
   const loading = useAppSelector((state) => state.films.loading);
   const dispatch = useAppDispatch();
@@ -25,15 +31,12 @@ export const FilmsCard = () => {
       ) : (
         <ul className={style.cardList}>
           {films.map((film) => (
-            <li
-              key={film.id}
-              className={style.card}
-              onClick={() => handleCardClick(film.id)}
-            >
+            <div  key={film.id} className={style.card}>
               <img
                 src={film.imageUrl}
                 alt={film.title}
                 className={style.image}
+                onClick={() => handleCardClick(film.id)}
               />
               <div className={style.infoBlock}>
                 <div className={style.infoBlockLeft}>
@@ -41,10 +44,10 @@ export const FilmsCard = () => {
                   <p className={style.rating}>Rating: {film.rating}</p>
                 </div>
                 <div>
-                  <button className={style.btnInfoBlock}>Tickets</button>
+                  <button className={style.btnInfoBlock} onClick={handleOpen} >Tickets</button>
                 </div>
               </div>
-            </li>
+            </div>
           ))}
         </ul>
       )}

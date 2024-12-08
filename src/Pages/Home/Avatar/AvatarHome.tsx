@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { Carousel } from "antd";
 import style from "./Avatar.module.css";
 
@@ -8,6 +7,7 @@ import Gladiator from "../../../assets/HomeImage/Gladiator 2.png";
 import Heretic from "../../../assets/HomeImage/Heretic.jpg";
 
 export const AvatarHome: React.FC = () => {
+  
   return (
     <Carousel autoplay autoplaySpeed={6000} className={style.carousel}>
       <div className={style.filmInfo}>
