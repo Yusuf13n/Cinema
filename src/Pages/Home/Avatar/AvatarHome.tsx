@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect} from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -12,6 +12,8 @@ import style from "./Avatar.module.css";
 import { useAppDispatch, useAppSelector } from "../../../Hooks";
 
 export const AvatarHome: React.FC = () => {
+
+
   const dispatch = useAppDispatch();
   const { items, activeSlide } = useAppSelector(
     (state) => state.HomeSlice
