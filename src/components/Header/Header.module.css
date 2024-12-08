@@ -1,27 +1,64 @@
 .header {
-  background-color: rgb(165, 173, 165);
-  padding: 20px 50px;
-  background-color: bisque;
-  border-radius: 10px;
-  position: absolute;
-  top: 40px;
-  left: 43%;
-  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  
+  margin: 15px auto;
 }
 
-.headerCenter {
+.logoContainer h1{
+  color: #7f0b8c;
+  font-size: 42px;
+  font-family: "RocknRoll One", sans-serif;
+}
+
+.navContainer {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+
+  max-width: 550px;
+  padding: 20px 50px;
+  border-radius: 10px;
+  background-color: rgba(141, 141, 141, 0.14);
+  transition: 0.3s ease;
+}
+.navContainer:hover {
+  background-color: rgba(141, 141, 141, 0.184);
 }
 
 .navList {
   display: flex;
   align-items: center;
   list-style: none;
-  text-decoration: none;
-  gap: 60px;
+  padding: 0;
+  margin: 0;
+  gap: 50px;
 }
+
 .navList a {
   text-decoration: none;
-  color: black;
+  color: rgb(191, 191, 191);
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 1px;
+  transition: color 0.4s ease;
+}
+.navList a:hover {
+  color: #9615a4;
+}
+
+.loginButton {
+  padding: 12px 25px;
+  backdrop-filter: blur(5px);
+  color: rgb(185, 185, 185);
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  background-color: rgba(141, 141, 141, 0.14);
+  transition: 0.3s ease;
+}
+.loginButton:hover {
+  background-color: rgba(141, 141, 141, 0.265);
 }

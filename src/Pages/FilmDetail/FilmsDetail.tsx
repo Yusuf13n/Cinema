@@ -40,6 +40,7 @@ export const FilmDetail = () => {
           </div>
         </div>
       </div>
+      <textarea name="otzyv" id=""></textarea>
     </div>
   );
 };
