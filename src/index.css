@@ -9,10 +9,10 @@
 }
 
 *::selection {
-  background-color: #984d6a;
+  background-color: #7c3f57;
 }
 
 body {
-  background: linear-gradient(135deg, #000000, #2f1532, #040c1d);
+  background: linear-gradient(200deg, #000000, #200e22, #040c1d);
   color: white;
 }

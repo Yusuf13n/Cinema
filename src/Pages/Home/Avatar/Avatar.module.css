@@ -14,12 +14,14 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  animation: zoomOut 12s ease-in-out infinite;
+  animation: zoomInOut 10s ease-in-out infinite;
+  transform-origin: center; /* Центр масштабирования */
 }
 
 .filmInfo {
-  position: absolute;
-  z-index: 1000;
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 .img-overlay {
@@ -31,13 +33,14 @@
   z-index: 1;
 }
 
-@keyframes zoomOut {
-  0%, 100% {
-    transform: scale(1.1); 
-    filter: brightness(1); 
+@keyframes zoomInOut {
+  0%,
+  100% {
+    transform: scale(1.1);
+    filter: brightness(1);
   }
   50% {
     transform: scale(1);
-    filter: brightness(0.8);
+    filter: brightness(0.9);
   }
 }

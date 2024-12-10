@@ -1,0 +1,104 @@
+.footer {
+  color: #ecf0f1;
+  padding: 40px 20px;
+  margin-top: 50px;
+  box-shadow: 0 0 10px black;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+  gap: 20px;
+}
+
+.branding {
+  flex: 1 1 300px;
+  margin: 20px;
+  text-align: center;
+}
+
+.logo {
+  color: #7f0b8c;
+  font-size: 28px;
+  font-family: "RocknRoll One", sans-serif;
+  text-align: start;
+  margin-bottom: 10px;
+}
+
+.description {
+  font-size: 14px;
+  color: #bdc3c7;
+  line-height: 1.5;
+  text-align: start;
+}
+
+.links,
+.contact {
+  flex: 1 1 300px;
+  margin: 20px;
+  text-align: start;
+}
+
+.social {
+  text-align: center;
+}
+
+.sectionTitle {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #ecf0f1;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.link {
+  color: #bdc3c7;
+  text-decoration: none;
+  font-size: 14px;
+  margin-bottom: 10px;
+  display: block;
+  transition: color 0.3s ease;
+}
+
+.link:hover {
+  color: #9615a4;
+}
+
+.contactInfo {
+  font-size: 14px;
+  color: #bdc3c7;
+  margin-bottom: 10px;
+}
+
+.socialIcons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.icon {
+  font-size: 24px;
+  color: #bdc3c7;
+  transition: color 0.3s ease;
+}
+
+.icon:hover {
+  color: #9615a4;
+}
+
+.bottom {
+  text-align: center;
+  margin-top: 20px;
+  transform: translateY(30px);
+  font-size: 14px;
+  color: #bdc3c7;
+}
