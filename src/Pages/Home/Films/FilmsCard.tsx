@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import style from "./Films.module.css";
 
 interface handleOpenProps {
-  handleOpen: () => void
+  handleOpen: (title: string) => void
 }
 
 export const FilmsCard = ({handleOpen}: handleOpenProps) => {
@@ -44,7 +44,7 @@ export const FilmsCard = ({handleOpen}: handleOpenProps) => {
                   <p className={style.rating}>Rating: {film.rating}</p>
                 </div>
                 <div>
-                  <button className={style.btnInfoBlock} onClick={handleOpen} >Tickets</button>
+                  <button className={style.btnInfoBlock} onClick={() => handleOpen(film.title)} >Tickets</button>
                 </div>
               </div>
             </div>

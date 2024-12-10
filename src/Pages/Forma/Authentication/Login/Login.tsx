@@ -5,7 +5,7 @@ import { loginFailure, loginReqest, loginSicces } from "../../../../Redux/Slices
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../FireBase/firebase.config";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faKey } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faKey, faAt } from "@fortawesome/free-solid-svg-icons";
 import style from './ui.module.css';
 
 export const Login: React.FC<{switchForm: () => void}> = ({switchForm}) => {
@@ -33,7 +33,7 @@ export const Login: React.FC<{switchForm: () => void}> = ({switchForm}) => {
       <div className={style.formBlock}>
         <h1>Login</h1>
         <div className={style.inputGroup}>
-          <FontAwesomeIcon icon={faUser} className={style.icon} />
+          <FontAwesomeIcon icon={faAt} className={style.icon} />
           <input 
             className={style.input} 
             type="email" 

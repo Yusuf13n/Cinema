@@ -4,7 +4,7 @@ import { FilmsCard } from './Films/FilmsCard'
 
 
 interface handleOpenProps {
-  handleOpen: () => void
+  handleOpen: (title: string) => void
 }
 
 export const Home = ({handleOpen}: handleOpenProps) => {
@@ -13,7 +13,7 @@ export const Home = ({handleOpen}: handleOpenProps) => {
   return (
     <div>
       <AvatarHome/>
-      <FilmsCard  handleOpen={handleOpen} />
+      <FilmsCard  handleOpen={handleOpen}/>
     </div>
   )
 }
