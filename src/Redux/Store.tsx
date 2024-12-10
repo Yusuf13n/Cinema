@@ -1,15 +1,14 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import HomeSlice from "./Slices/HomeSlice";
+import carouselReducer from "./Slices/HomeSlice";
 import { filmsReducer } from "./Slices/FilmsSlice";
-import { authReducer } from './Slices/authSlice';
+import { authReducer } from "./Slices/authSlice";
 import { seatsReducer } from "./Slices/seatsSlice";
-
 
 const rootReducer = combineReducers({
   films: filmsReducer,
-  HomeSlice,
+  carousel: carouselReducer,
   auth: authReducer,
-  seats: seatsReducer
+  seats: seatsReducer,
 });
 
 export const store = configureStore({
