@@ -2,14 +2,18 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  
-  margin: 15px auto;
+
+  margin: 20px auto;
 }
 
-.logoContainer h1{
-  color: #7f0b8c;
-  font-size: 42px;
+.logoContainer h1 {
+  font-size: 34px;
   font-family: "RocknRoll One", sans-serif;
+  margin: 15px auto;
+  color: transparent;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  -webkit-text-stroke: 2px #7f0b8c;
 }
 
 .navContainer {
@@ -19,11 +23,8 @@
   max-width: 550px;
   padding: 20px 50px;
   border-radius: 10px;
-  background-color: rgba(141, 141, 141, 0.14);
+  background-color: rgba(64, 64, 64, 0.18);
   transition: 0.3s ease;
-}
-.navContainer:hover {
-  background-color: rgba(141, 141, 141, 0.184);
 }
 
 .navList {
@@ -35,30 +36,36 @@
   gap: 50px;
 }
 
-.navList a {
+.navList li a {
   text-decoration: none;
   color: rgb(191, 191, 191);
   font-weight: 600;
   font-size: 16px;
   letter-spacing: 1px;
+  cursor: pointer;
   transition: color 0.4s ease;
 }
-.navList a:hover {
+.navList li:hover {
+  color: #9615a4;
+  cursor: pointer;
+}
+.navList li a:hover {
   color: #9615a4;
 }
 
 .loginButton {
-  padding: 12px 25px;
-  backdrop-filter: blur(5px);
-  color: rgb(185, 185, 185);
-  border: none;
+  padding: 10px 20px;
+  color: #cfcfcf;
+  border: 2px solid #5a0c63;
   border-radius: 8px;
   font-size: 16px;
   letter-spacing: 1px;
   cursor: pointer;
-  background-color: rgba(141, 141, 141, 0.14);
-  transition: 0.3s ease;
+  background-color: transparent;
+  transition: 0.4s ease;
 }
+
 .loginButton:hover {
-  background-color: rgba(141, 141, 141, 0.265);
+  background-color: #5a0c63;
+  color: #fff;
 }

@@ -1,13 +1,17 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import Moana from '../../assets/HomeImage/Moana 2.jpeg'
+import Moana from '../../assets/HomeImage/Moana 2.jpeg';
+import Wicked from "../../assets/HomeImage/Wicked.jpeg";
+import Gladiator from "../../assets/HomeImage/Gladiator 2.jpg";
+import Heretic from "../../assets/HomeImage/Heretic.jpg";
 
-interface Item {
+export interface Item {
   id: number;
   title: string;
   description: string;
   image: string;
 }
+
 interface CarouselState {
   items: Item[];
   activeSlide: number;
@@ -17,21 +21,35 @@ const initialState: CarouselState = {
   items: [
     {
       id: 1,
-      title: "Moana 2",
-      description: "Nike combines style, comfort, and innovation for every step.",
+      title: "Moana",
+      description:
+        "An adventurous story of Moana's journey to save her people.",
       image: Moana,
     },
     {
       id: 2,
-      title: "Moana 2",
-      description: "Nike shoes enhance your workout and everyday moves with cutting-edge design.",
-      image: Moana,
+      title: "Wicked",
+      description: "The untold story of the witches of Oz.",
+      image: Wicked,
+    },
+    {
+      id: 3,
+      title: "Gladiator 2",
+      description:
+        "A betrayed gladiator seeks revenge against the corrupt emperor.",
+      image: Gladiator,
+    },
+    {
+      id: 4,
+      title: "Heretic",
+      description: "A tale of faith and power in the medieval world.",
+      image: Heretic,
     },
   ],
   activeSlide: 0,
 };
 
-const HomeSlice = createSlice({
+const carouselSlice = createSlice({
   name: "carousel",
   initialState,
   reducers: {
@@ -41,5 +59,5 @@ const HomeSlice = createSlice({
   },
 });
 
-export const { setActiveSlide } = HomeSlice.actions;
-export default HomeSlice.reducer;
+export const { setActiveSlide } = carouselSlice.actions;
+export default carouselSlice.reducer;
