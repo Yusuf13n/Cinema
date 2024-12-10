@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../../Hooks";
 import { useNavigate } from "react-router-dom";
+import { User, updateProfile } from 'firebase/auth';  // Импортируем updateProfile
 import {
   loginFailure,
   loginReqest,
@@ -9,12 +10,13 @@ import {
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../FireBase/firebase.config";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faKey } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faKey, faAt } from "@fortawesome/free-solid-svg-icons";
 import style from "./ui.module.css";
 
 export const Register: React.FC<{ switchForm: () => void }> = ({
   switchForm,
 }) => {
+  const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
@@ -31,6 +33,14 @@ export const Register: React.FC<{ switchForm: () => void }> = ({
         email,
         password
       );
+
+      if (userCredential.user) {
+        // Используем updateProfile из firebase/auth
+        await updateProfile(userCredential.user, {
+          displayName: name,
+        });
+      }
+
       dispatch(loginSicces(userCredential.user.email || ""));
       navigate("/");
     } catch (err: any) {
@@ -43,7 +53,17 @@ export const Register: React.FC<{ switchForm: () => void }> = ({
       <div className={style.formBlock}>
         <h1 className={style.titleRegister}>Sign in</h1>
         <div className={style.inputGroup}>
-          <FontAwesomeIcon icon={faUser} className={style.icon} />
+          <FontAwesomeIcon icon={faUser} className={style.icon}/>
+          <input
+            className={style.input}
+            type="text"
+            placeholder="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+        <div className={style.inputGroup}>
+          <FontAwesomeIcon icon={faAt} className={style.icon} />
           <input
             className={style.input}
             type="text"

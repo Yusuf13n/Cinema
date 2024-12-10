@@ -12,12 +12,33 @@
   align-items: center;
 }
 
+.titleModal {
+  color: black;
+}
+
+.titleText {
+  color: black;
+  text-align: start;
+  padding-left: 7px;
+}
+
 .content {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: white;
   padding: 20px;
   border-radius: 8px;
-  max-width: 600px;
+  width: 900px;
+  height: 600px;
   text-align: center;
+}
+
+.blockBorder {
+  border-radius: 10px;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+  padding: 10px;
 }
 
 .seatingChart {
@@ -62,4 +83,12 @@
 
 .bookButton:hover {
   background-color: #0056b3;
+}
+
+.logoX {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
 }

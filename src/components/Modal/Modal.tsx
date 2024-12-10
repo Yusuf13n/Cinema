@@ -1,13 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import style from './ui.module.css'
 import { useAppDispatch, useAppSelector } from '../../Hooks'
 import { bookSelectedSeats, selectSeat } from '../../Redux/Slices/seatsSlice'
+import logogX from '../../assets/HomeImage/logoX.png'
+import { SeatConfirmation } from '../Modal-Seat-Confirmation/SeatConfirmation'
 
 interface handleCloseProps {
   handleClose: () => void
+  title: string
 }
 
-export const Modal = ({handleClose}: handleCloseProps) => {
+export const Modal = ({handleClose, title}: handleCloseProps) => {
+  const [showConfirmation, setShowConfirmation] = useState<boolean>(false)
   const dispatch = useAppDispatch();
   const seats = useAppSelector((state) => state.seats.seats);
 
@@ -20,17 +24,29 @@ export const Modal = ({handleClose}: handleCloseProps) => {
   };
 
   const handleBooking = () => {
-    dispatch(bookSelectedSeats());
-    alert("Бронирование успешно");
-    handleClose();
+    setShowConfirmation(true)
   };
+
+  const handleConfirmBooking = () => {
+    dispatch(bookSelectedSeats())
+    alert('Бронирование успешно');
+    setShowConfirmation(false);
+    handleClose();
+  }
+
+  const handleCancelBooking = () => {
+    setShowConfirmation(false);
+  }
 
 
   return (
     <div className={style.containerModal} onClick={handleClose}>
       <div className={style.content} onClick={handleContentClick}>
-        <h2>Выберите места</h2>
+        <img className={style.logoX} src={logogX} onClick={handleClose} alt="" />
+        <div className={style.blockBorder}>
+        <h2 className={style.titleModal}>Фильм: {title}</h2>
         <div className={style.seatingChart}>
+        <h3 className={style.titleText}>Выберите места:</h3>
           <div className={style.row}>
             {seats.map((seat) => (
               <button 
@@ -47,6 +63,10 @@ export const Modal = ({handleClose}: handleCloseProps) => {
         </div>
         <button onClick={handleBooking} className={style.bookButton}>Забронировать</button>
       </div>
+      </div>
+      {showConfirmation && (
+        <SeatConfirmation handleConfirm={handleConfirmBooking} handleCancel={handleCancelBooking} title={title}/>
+      )}
     </div>
   )
 }
