@@ -15,9 +15,9 @@ export const Footer = () => {
         <div className={style.links}>
           <h3 className={style.sectionTitle}>Quick Links</h3>
           <ul className={style.list}>
-            <li><a href="/about" className={style.link}>About Us</a></li>
-            <li><a href="/blog" className={style.link}>Blog</a></li>
-            <li><a href="/contact" className={style.link}>Contact Us</a></li>
+            <li><a href="" className={style.link}>About Us</a></li>
+            <li><a href="" className={style.link}>Blog</a></li>
+            <li><a href="" className={style.link}>Contact Us</a></li>
           </ul>
         </div>
         <div className={style.contact}>

@@ -6,8 +6,6 @@ import { signOut } from "firebase/auth";
 import { auth } from "../../Pages/Forma/FireBase/firebase.config";
 import { logout } from "../../Redux/Slices/authSlice";
 
-// import logo from "../../assets/Header/Logo.png";
-
 export const Header = () => {
   const user = useAppSelector(state => state.auth.user)
 

@@ -1,3 +1,11 @@
+.skeletonCard {
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  background-color: #3333337c; 
+}
+
 .container {
   display: flex;
   position: relative;
@@ -66,8 +74,8 @@
 .btnInfoBlock {
   padding: 10px 25px;
   margin-top: 20px;
-  background-color: rgb(255 204 0);
-  color: black;
+  background-color: #5c1d77;
+  color: rgb(218, 218, 218);
   font-size: 16px;
   font-weight: 600;
   border-radius: 7px;
@@ -76,7 +84,7 @@
   transition: 0.4s ease;
 }
 .btnInfoBlock:hover {
-  opacity: 0.7;
+  opacity: 0.8;
 }
 
 .cardList {

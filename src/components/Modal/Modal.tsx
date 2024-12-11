@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import style from './ui.module.css'
 import { useAppDispatch, useAppSelector } from '../../Hooks'
 import { bookSelectedSeats, selectSeat } from '../../Redux/Slices/seatsSlice'
-import logogX from '../../assets/HomeImage/logoX.png'
 import { SeatConfirmation } from '../Modal-Seat-Confirmation/SeatConfirmation'
 
 interface handleCloseProps {
@@ -42,11 +41,10 @@ export const Modal = ({handleClose, title}: handleCloseProps) => {
   return (
     <div className={style.containerModal} onClick={handleClose}>
       <div className={style.content} onClick={handleContentClick}>
-        <img className={style.logoX} src={logogX} onClick={handleClose} alt="" />
         <div className={style.blockBorder}>
-        <h2 className={style.titleModal}>Фильм: {title}</h2>
+        <h2 className={style.titleModal}>Movie: {title}</h2>
         <div className={style.seatingChart}>
-        <h3 className={style.titleText}>Выберите места:</h3>
+        <h3 className={style.titleText}>Select seats:</h3>
           <div className={style.row}>
             {seats.map((seat) => (
               <button 
@@ -61,7 +59,7 @@ export const Modal = ({handleClose, title}: handleCloseProps) => {
 
           </div>
         </div>
-        <button onClick={handleBooking} className={style.bookButton}>Забронировать</button>
+        <button onClick={handleBooking} className={style.bookButton}>Reserve</button>
       </div>
       </div>
       {showConfirmation && (

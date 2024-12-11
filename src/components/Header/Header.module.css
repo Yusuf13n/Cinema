@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: space-around;
 
-  margin: 20px auto;
+  margin: 15px auto;
 }
 
 .logoContainer h1 {
@@ -67,5 +67,6 @@
 
 .loginButton:hover {
   background-color: #5a0c63;
+  box-shadow: 0 0 15px #8a1897;
   color: #fff;
 }

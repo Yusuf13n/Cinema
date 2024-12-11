@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import Moana from '../../assets/HomeImage/Moana 2.jpeg';
-import Wicked from "../../assets/HomeImage/Wicked.jpeg";
+import Wicked from "../../assets/HomeImage/wicked.jpg";
 import Gladiator from "../../assets/HomeImage/Gladiator 2.jpg";
 import Heretic from "../../assets/HomeImage/Heretic.jpg";
 

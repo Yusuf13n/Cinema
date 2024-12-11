@@ -1,94 +1,111 @@
-/* BookingModal.module.css */
 .containerModal {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
   z-index: 1000;
   display: flex;
   justify-content: center;
   align-items: center;
+  animation: fadeIn 0.3s ease-in-out;
 }
 
-.titleModal {
-  color: black;
-}
-
-.titleText {
-  color: black;
-  text-align: start;
-  padding-left: 7px;
-}
-
-.content {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  width: 900px;
-  height: 600px;
-  text-align: center;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .blockBorder {
-  border-radius: 10px;
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
-  padding: 10px;
+  border-radius: 12px;
+  box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.205);
+  padding: 40px;
+  background: white;
+  backdrop-filter: blur(5px);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.titleModal {
+  color: #333333;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.titleText {
+  color: #555555;
+  text-align: start;
+  padding-left: 10px;
+  font-size: 1.2rem;
+  margin-bottom: 15px;
 }
 
 .seatingChart {
-  margin: 20px 0;
+  margin: 25px 0;
 }
 
 .row {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  width: 400px;
-  margin: 10px 0;
+  width: 500px;
+  margin: 15px 0;
 }
 
 .seat {
   padding: 10px;
-  margin: 5px;
-  width: 40px;
-  background-color: #f0f0f0;
-  border: none;
+  margin: 6px;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #e0e0e0, #ffffff);
+  border: 1px solid #cccccc;
   cursor: pointer;
   font-weight: bold;
-  border-radius: 4px;
+  border-radius: 8px;
+  transition: transform 0.2s, background-color 0.3s;
 }
 
 .seat:hover {
-  background-color: #d0d0d0;
+  background: linear-gradient(135deg, #d0d0d0, #f0f0f0);
 }
 
 .selected {
-  background-color: #7f0b8c; /* Зеленый для выбранных мест */
+  background: linear-gradient(135deg, #6a0dad, #9c27b0);
+  color: white;
+  border: none;
+}
+
+.booked {
+  background: linear-gradient(135deg, #b0b0b0, #c0c0c0);
+  color: #888888;
+  border: none;
+  cursor: not-allowed;
 }
 
 .bookButton {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
+  padding: 12px 24px;
+  background: #0c0c0c;
+  color: rgb(227, 227, 227);
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  border-radius: 8px;
   border: none;
-  border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  align-self: center;
+  margin-top: 20px;
 }
 
 .bookButton:hover {
-  background-color: #0056b3;
-}
-
-.logoX {
-  cursor: pointer;
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 40px;
+  background: #151515e3;
 }

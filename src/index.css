@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=RocknRoll+One&family=Rubik:ital,wght@0,300..900;1,300..900&family=Varela+Round&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Indie+Flower&family=RocknRoll+One&family=Rubik:ital,wght@0,300..900;1,300..900&family=Varela+Round&display=swap");
 
 * {
   margin: 0;
@@ -15,4 +15,35 @@
 body {
   background: linear-gradient(200deg, #000000, #200e22, #040c1d);
   color: white;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #200e22;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #50367b;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #692e82;
+}
+
+scrollbar-track {
+  background: transparent;
+}
+
+scrollbar-thumb {
+  background-color: #6a4c9c;
+  border-radius: 10px;
+}
+
+scrollbar-thumb:hover {
+  background-color: #8e44ad;
 }
