@@ -36,15 +36,27 @@ export const FilmsCard = ({ handleOpen }: HandleOpenProps) => {
 
   return (
     <div className={style.container}>
-      <div className={style.filterWrapper}>
-        <input
-          type="text"
-          placeholder="Search for a movie..."
-          className={style.searchInput}
-          value={searchQuery}
-          onChange={handleSearch}
-        />
-        <i className={`fas fa-search ${style.searchIcon}`} />
+      <div className={style.inputFilterContain}>
+        <div className={style.searchWrapper}>
+          <input
+            type="text"
+            placeholder="Search for a movie..."
+            className={style.searchInput}
+            value={searchQuery}
+            onChange={handleSearch}
+          />
+        </div>
+
+        <div className={style.filterWrapper}>
+          <select className={style.genreSelect}>
+            <option value="">Genre</option>
+            <option value="action">Action</option>
+            <option value="comedy">Comedy</option>
+            <option value="drama">Drama</option>
+            <option value="horror">Horror</option>
+            <option value="romance">Romance</option>
+          </select>
+        </div>
       </div>
 
       {loading ? (
