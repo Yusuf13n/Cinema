@@ -6,15 +6,10 @@ import Carousel from "antd/lib/carousel";
 import style from "./Avatar.module.css";
 
 export const AvatarHome: React.FC = () => {
-
   const items: Item[] = useSelector((state: RootState) => state.carousel.items);
 
   return (
-    <Carousel
-      autoplay
-      autoplaySpeed={4000}
-      className={style.carousel}
-    >
+    <Carousel autoplay autoplaySpeed={4000} className={style.carousel}>
       {items.map((item: Item) => (
         <div key={item.id} className={style.filmInfo}>
           <div className={style.imgOverlay}>
@@ -23,10 +18,6 @@ export const AvatarHome: React.FC = () => {
               src={item.image}
               alt={item.title}
             />
-            <div className={style.overlayContent}>
-              <h2 className={style.title}>{item.title}</h2>
-              <button className={style.moreButton}>More</button>
-            </div>
           </div>
         </div>
       ))}

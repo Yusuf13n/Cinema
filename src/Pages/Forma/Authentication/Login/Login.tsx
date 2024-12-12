@@ -58,7 +58,7 @@ export const Login: React.FC<{switchForm: () => void}> = ({switchForm}) => {
             onClick={handleLogin} 
             disabled={loading}
           >
-            {loading ? "Logging in..." : "Login"}
+            {loading ? "Login..." : "Login"}
           </button>
         </div>
         <p className={style.switchText}>
