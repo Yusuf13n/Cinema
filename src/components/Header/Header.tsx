@@ -43,7 +43,7 @@ export const Header = () => {
         </ul>
       </nav>
       <div className={style.loginButtonContainer}>
-        {!user ? <button className={style.loginButton} onClick={handleOpenLogin}> Log in </button> : <button onClick={handleLogout}>Выход</button>}
+        {!user ? <button className={style.loginButton} onClick={handleOpenLogin}> Log in </button> : <button className={style.loginButton} onClick={handleLogout}> Sign out </button>}
         
       </div>
     </header>
