@@ -4,8 +4,56 @@
   align-items: center;
 }
 
+.inputFilterContain {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 700px;
+  margin-left: 465px;
+}
+
+.genreSelect {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 8px 17px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #969696;
+  background-color: transparent;
+  color: #aaa;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23969696' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 14px;
+}
+
+.genreSelect:hover {
+  border-color: #969696;
+  color: #ffffff;
+}
+
+.genreSelect:hover {
+  border-color: #5c1d77;
+  box-shadow: 0 0 20px rgba(92, 29, 119, 0.5);
+}
+.genreSelect:focus {
+  border-color: #5c1d77;
+  box-shadow: 0 0 20px rgba(92, 29, 119, 0.5);
+}
+
+option {
+  background-color: #000000;
+  color: white;
+  padding: 10px;
+}
+
 .searchInput {
-  width: 260px;
+  width: 235px;
   padding: 10px 30px;
   margin: 30px 0;
   font-size: 16px;
@@ -20,16 +68,7 @@
 
 .searchInput:focus {
   border-color: #5c1d77;
-  box-shadow: 0 0 10px rgba(92, 29, 119, 0.5);
-}
-
-.searchIcon {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #aaa;
-  font-size: 20px;
+  box-shadow: 0 0 20px rgba(92, 29, 119, 0.5);
 }
 
 .card {
@@ -64,9 +103,9 @@
   position: absolute;
   bottom: 0;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.703);
   color: #fff;
-  padding: 15px;
+  padding: 20px;
   font-size: 18px;
   border-radius: 0 0 10px 10px;
 }
@@ -87,7 +126,7 @@
   border-radius: 50px;
   border: none;
   cursor: pointer;
-  
+
   display: flex;
   align-items: center;
   transition: 0.3s ease;
