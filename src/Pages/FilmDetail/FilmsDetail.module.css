@@ -62,3 +62,62 @@
 iframe {
   border-radius: 8px;
 }
+
+.reviewSection {
+  margin-top: 20px;
+}
+
+.reviewInput {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+}
+
+.submitReviewBtn {
+  margin-top: 10px;
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.submitReviewBtn:hover {
+  background-color: #0056b3;
+}
+
+.reviews {
+  margin-top: 20px;
+}
+
+.review {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+
+.review p {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.loginPrompt {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.loginPrompt button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.loginPrompt button:hover {
+  background-color: #0056b3;
+}

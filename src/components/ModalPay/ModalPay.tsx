@@ -47,7 +47,7 @@ export const ModalPay: React.FC = () => {
                 <FaCalendarAlt className={style.icon} /> Validity period
               </label>
               <input
-                type="text"
+                type="date"
                 id="expiryDate"
                 placeholder="MM/YY"
                 className={style.input}
