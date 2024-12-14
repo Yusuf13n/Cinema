@@ -41,7 +41,7 @@ export const Register: React.FC<{ switchForm: () => void }> = ({
         });
       }
 
-      dispatch(loginSicces(userCredential.user.email || ""));
+      dispatch(loginSicces({email: userCredential.user.email || "", name: name}));
       navigate("/");
     } catch (err: any) {
       dispatch(loginFailure(err.message));
