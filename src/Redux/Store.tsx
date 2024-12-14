@@ -1,8 +1,8 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import carouselReducer from "./slices/HomeSlice";
-import { filmsReducer } from "./slices/FilmsSlice";
+import { filmsReducer } from "./slices/filmsSlice";
 import { authReducer } from "./slices/authSlice";
 import { seatsReducer } from "./slices/seatsSlice";
+import { carouselReducer } from "./slices/homeSlice";
 
 const rootReducer = combineReducers({
   films: filmsReducer,

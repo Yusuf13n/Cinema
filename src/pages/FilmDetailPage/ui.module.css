@@ -187,30 +187,6 @@ iframe {
   overflow: hidden;
 }
 
-.reviewBlock:before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(92, 29, 119, 0.5), transparent);
-  transform: rotate(45deg);
-  opacity: 0.2;
-  animation: glowEffect 6s infinite alternate;
-}
-
-@keyframes glowEffect {
-  from {
-    transform: translate(0, 0) scale(1);
-    opacity: 0.1;
-  }
-  to {
-    transform: translate(20px, 20px) scale(1.1);
-    opacity: 0.2;
-  }
-}
-
 .reviewSection {
   width: 100%;
   display: flex;
