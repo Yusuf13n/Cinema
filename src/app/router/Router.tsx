@@ -1,9 +1,10 @@
 import { Route, Routes, useNavigate } from 'react-router-dom'
-import { Home } from '../Home/Home'
-import { Forma } from '../Forma/Forma'
-import { FilmDetail } from '../FilmDetail/FilmsDetail'
-import { Modal } from '../../components/Modal/Modal'
+import { Modal } from '../../shared/ui/ModalPlaces'
 import { useState } from 'react'
+import { FilmDetailPage } from '@/pages/FilmDetailPage'
+import { AuthenticationPage } from '@/pages/AuthenticationPage'
+import { HomePage } from '@/pages/HomePage'
+
 
 export const Router = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -22,12 +23,12 @@ export const Router = () => {
         <Route path="/" element={
           <> 
           {isOpen && <Modal handleClose={handleClose} title={selectedFilmTitle} />} 
-          <Home handleOpen={handleOpen}/>
+          <HomePage handleOpen={handleOpen}/>
           </>
         }
         />
-        <Route path="/film/:id" element={<FilmDetail  />} />
-        <Route path="/Auth" element={<Forma />} />
+        <Route path="/film/:id" element={<FilmDetailPage  />} />
+        <Route path="/Auth" element={<AuthenticationPage />} />
     </Routes>
   )
 }

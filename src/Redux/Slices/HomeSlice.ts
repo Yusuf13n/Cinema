@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import Moana from "../../assets/HomeImage/Moana 2.jpeg";
-import Wicked from "../../assets/HomeImage/wicked.jpg";
-import Gladiator from "../../assets/HomeImage/Gladiator 2.jpg";
-import Heretic from "../../assets/HomeImage/Heretic.jpg";
+import Moana from "../../shared/assets/HomeImage/Moana 2.jpeg";
+import Wicked from "../../shared/assets/HomeImage/wicked.jpg";
+import Gladiator from "../../shared/assets/HomeImage/Gladiator 2.jpg";
+import Heretic from "../../shared/assets/HomeImage/Heretic.jpg";
 
 export interface Item {
   id: number;
@@ -35,7 +35,8 @@ const initialState: CarouselState = {
     {
       id: 3,
       title: "Gladiator 2",
-      description: "A betrayed gladiator seeks revenge against the corrupt emperor.",
+      description:
+        "A betrayed gladiator seeks revenge against the corrupt emperor.",
       image: Gladiator,
     },
     {

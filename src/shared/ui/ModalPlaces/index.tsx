@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import style from "./ui.module.css";
-import { useAppDispatch, useAppSelector } from "../../Hooks";
-import { bookSelectedSeats, selectSeat } from "../../Redux/Slices/seatsSlice";
+import { useAppDispatch, useAppSelector } from "../../../hooks";
+import { bookSelectedSeats, selectSeat } from "../../../redux/slices/seatsSlice";
 import { ModalPay } from "../ModalPay/ModalPay";
 import { MdClose } from "react-icons/md";
-import { db } from "../../Pages/Forma/FireBase/firebase.config";
+import { db } from "../../consts/firebase/firebase.config";
 import { collection, doc, updateDoc, onSnapshot } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 

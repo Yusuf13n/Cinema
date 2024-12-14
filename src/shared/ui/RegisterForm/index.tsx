@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../../../Hooks";
+import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { useNavigate } from "react-router-dom";
 import { User, updateProfile } from 'firebase/auth';  // Импортируем updateProfile
 import {
   loginFailure,
   loginReqest,
   loginSicces,
-} from "../../../../Redux/Slices/authSlice";
+} from "../../../redux/slices/authSlice";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../FireBase/firebase.config";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faKey, faAt } from "@fortawesome/free-solid-svg-icons";
 import style from "./ui.module.css";
+import { auth } from "@/shared/consts/firebase/firebase.config";
 
 export const Register: React.FC<{ switchForm: () => void }> = ({
   switchForm,
@@ -88,7 +88,7 @@ export const Register: React.FC<{ switchForm: () => void }> = ({
             onClick={handleRegister}
             disabled={loading}
           >
-            {loading ? "Регистрация..." : "Sign in"}
+            {loading ? "Sign up..." : "Sign in"}
           </button>
         </div>
         <p className={style.switchText}>

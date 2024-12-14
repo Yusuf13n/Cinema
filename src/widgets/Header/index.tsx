@@ -1,10 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
-
-import style from "./Header.module.css";
-import { useAppDispatch, useAppSelector } from "../../Hooks";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 import { signOut } from "firebase/auth";
-import { auth } from "../../Pages/Forma/FireBase/firebase.config";
-import { logout } from "../../Redux/Slices/authSlice";
+import { auth } from "../../shared/consts/firebase/firebase.config";
+import { logout } from "../../redux/slices/authSlice";
+
+import style from "./ui.module.css";
 
 export const Header = () => {
   const user = useAppSelector(state => state.auth.user)

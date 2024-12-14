@@ -1,18 +1,19 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { RootState } from "../../Redux/Store";
-import style from "./FilmsDetail.module.css";
-import { db, auth } from "../../Pages/Forma/FireBase/firebase.config"; // Импортируем настройки Firebase
+import { RootState } from "../../redux/store";
+import { db, auth } from "../../shared/consts/firebase/firebase.config"; // Импортируем настройки Firebase
 import { collection, addDoc, query, where, onSnapshot } from "firebase/firestore"; // Импортируем Firestore методы
-import { onAuthStateChanged} from "firebase/auth"; // Импортируем нужные методы Firebase
-import { useAppSelector } from "../../Hooks";
+import { onAuthStateChanged } from "firebase/auth"; // Импортируем нужные методы Firebase
+import { useAppSelector } from "../../hooks";
 import { useEffect, useState } from "react";
 
-export const FilmDetail = () => {
+import style from "./ui.module.css";
+
+export const FilmDetailPage = () => {
   const { id } = useParams<{ id: string }>();
-  const [reviews, setReviews] = useState<string[]>([]); // Состояние для отзывов
-  const [newReview, setNewReview] = useState<string>(""); // Состояние для нового отзыва
-  const user = useAppSelector((state) => state.auth.user)
+  const [reviews, setReviews] = useState<string[]>([]);
+  const [newReview, setNewReview] = useState<string>("");
+  const user = useAppSelector((state) => state.auth.user);
 
   const navigate = useNavigate();
 
@@ -38,8 +39,7 @@ export const FilmDetail = () => {
   }, [id]);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, () => {
-    });
+    const unsubscribe = onAuthStateChanged(auth, () => {});
 
     return () => unsubscribe();
   }, []);
@@ -58,8 +58,8 @@ export const FilmDetail = () => {
   };
 
   const handleGoogleLogin = () => {
-    navigate("/Auth")
-  }
+    navigate("/Auth");
+  };
 
   if (!film) {
     return <p>Loading...</p>;
@@ -91,36 +91,39 @@ export const FilmDetail = () => {
         </div>
       </div>
 
-      {user ? (
-        <div className={style.reviewSection}>
-          <textarea
-            value={newReview}
-            onChange={(e) => setNewReview(e.target.value)}
-            placeholder="Leave a review..."
-            className={style.reviewInput}
-          ></textarea>
-          <button onClick={handleAddReview} className={style.submitReviewBtn}>
-          Отправить отзыв
-          </button>
-        </div>
-      ) : (
-        <div className={style.loginPrompt}>
-          <p>Оставить отзыв</p>
-          <button onClick={handleGoogleLogin}>Отзывы</button>
-        </div>
-      )}
-
-      <div className={style.reviews}>
-        <h3>Отзывы:</h3>
-        {reviews.length === 0 ? (
-          <p>Войдите чтобы оставить отзыв</p>
+      <div className={style.reviewBlock}>
+        <h3>Leave your review:</h3>
+        {user ? (
+          <div className={style.reviewSection}>
+            <textarea
+              value={newReview}
+              onChange={(e) => setNewReview(e.target.value)}
+              placeholder="Write your review..."
+              className={style.reviewInput}
+            ></textarea>
+            <button onClick={handleAddReview} className={style.submitReviewBtn}>
+              Submit
+            </button>
+          </div>
         ) : (
-          reviews.map((review, index) => (
-            <div key={index} className={style.review}>
-              <p>{review}</p>
-            </div>
-          ))
+          <div className={style.loginPrompt}>
+            <p>You need to log in to leave a review.</p>
+            <button onClick={handleGoogleLogin}>Log in</button>
+          </div>
         )}
+
+        <div className={style.reviews}>
+          <h3>User Reviews:</h3>
+          {reviews.length === 0 ? (
+            <p>No reviews yet. Be the first to leave one!</p>
+          ) : (
+            reviews.map((review, index) => (
+              <div key={index} className={style.reviewCard}>
+                <p>{review}</p>
+              </div>
+            ))
+          )}
+        </div>
       </div>
     </div>
   );
