@@ -60,4 +60,4 @@ const carouselSlice = createSlice({
 });
 
 export const { setActiveSlide } = carouselSlice.actions;
-export default carouselSlice.reducer;
+export const carouselReducer = carouselSlice.reducer;

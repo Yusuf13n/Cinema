@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
-import { Item } from "../../../redux/slices/HomeSlice";
+import { Item } from "../../../redux/slices/homeSlice";
 import Carousel from "antd/lib/carousel";
 import style from "./ui.module.css";
 
