@@ -3,16 +3,23 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { db, auth } from "../../shared/consts/firebase/firebase.config"; // Импортируем настройки Firebase
 import { collection, addDoc, query, where, onSnapshot } from "firebase/firestore"; // Импортируем Firestore методы
-import { onAuthStateChanged } from "firebase/auth"; // Импортируем нужные методы Firebase
+import { User, onAuthStateChanged } from "firebase/auth"; // Импортируем нужные методы Firebase
 import { useAppSelector } from "../../hooks";
 import { useEffect, useState } from "react";
 
 import style from "./ui.module.css";
 
+interface Reviev {
+  review: string;
+  userName: string;
+  userEmail: string;
+}
+
 export const FilmDetailPage = () => {
   const { id } = useParams<{ id: string }>();
-  const [reviews, setReviews] = useState<string[]>([]);
+  const [reviews, setReviews] = useState<Reviev[]>([]);
   const [newReview, setNewReview] = useState<string>("");
+
   const user = useAppSelector((state) => state.auth.user);
 
   const navigate = useNavigate();
@@ -25,15 +32,15 @@ export const FilmDetailPage = () => {
     if (id) {
       const reviewsCollection = collection(db, "reviews");
       const q = query(reviewsCollection, where("filmId", "==", id));
-
+  
       const unsubscribe = onSnapshot(q, (querySnapshot) => {
-        const reviewsData: string[] = [];
+        const reviewsData: { review: string; userName: string; userEmail: string }[] = [];
         querySnapshot.forEach((doc) => {
-          reviewsData.push(doc.data().review);
+          reviewsData.push(doc.data() as { review: string; userName: string; userEmail: string });
         });
-        setReviews(reviewsData);
+        setReviews(reviewsData); // Теперь setReviews ожидает массив объектов
       });
-
+  
       return () => unsubscribe();
     }
   }, [id]);
@@ -45,19 +52,32 @@ export const FilmDetailPage = () => {
   }, []);
 
   const handleAddReview = async () => {
+    if (!newReview.trim()) {
+      alert("Вы не можете оставить пустой отзыв!!!");
+      return;
+    }
+
     try {
+      if (!user) {
+        alert("Вы должны быть авторизованы, чтобы оставить отзыв!");
+        return;
+      }
+      
       await addDoc(collection(db, "reviews"), {
         filmId: id,
         review: newReview,
+        userEmail: user.email || "",
+        userName: user?.name || "Anonymous", 
         timestamp: new Date(),
       });
+
       setNewReview("");
     } catch (error) {
       console.error("Error adding review: ", error);
     }
   };
 
-  const handleGoogleLogin = () => {
+  const handleLogin = () => {
     navigate("/Auth");
   };
 
@@ -92,7 +112,7 @@ export const FilmDetailPage = () => {
       </div>
 
       <div className={style.reviewBlock}>
-        <h3>Leave your review:</h3>
+        <h3>Оставьте свой отзыв:</h3>
         {user ? (
           <div className={style.reviewSection}>
             <textarea
@@ -107,19 +127,20 @@ export const FilmDetailPage = () => {
           </div>
         ) : (
           <div className={style.loginPrompt}>
-            <p>You need to log in to leave a review.</p>
-            <button onClick={handleGoogleLogin}>Log in</button>
+            <p>Чтобы оставить отзыв, вам необходимо войти в систему.</p>
+            <button onClick={handleLogin}>Авторизоваться</button>
           </div>
         )}
 
         <div className={style.reviews}>
-          <h3>User Reviews:</h3>
+          <h3>Отзывы пользователей:</h3>
           {reviews.length === 0 ? (
-            <p>No reviews yet. Be the first to leave one!</p>
+            <p>Пока нет отзывов. Оставьте свой отзыв первым!</p>
           ) : (
             reviews.map((review, index) => (
               <div key={index} className={style.reviewCard}>
-                <p>{review}</p>
+                <p>{review.userName}</p>
+                <p>{review.review}</p>
               </div>
             ))
           )}
