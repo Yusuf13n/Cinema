@@ -1,11 +1,11 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../../../Redux/Store";
-import { Item } from "../../../Redux/Slices/HomeSlice";
+import { RootState } from "../../../redux/store";
+import { Item } from "../../../redux/slices/HomeSlice";
 import Carousel from "antd/lib/carousel";
-import style from "./Avatar.module.css";
+import style from "./ui.module.css";
 
-export const AvatarHome: React.FC = () => {
+export const HomeCarousel: React.FC = () => {
   const items: Item[] = useSelector((state: RootState) => state.carousel.items);
 
   return (

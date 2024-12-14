@@ -60,12 +60,15 @@ option {
   border-radius: 25px;
   background-color: transparent;
   color: #aaa;
-  border: 1px solid #969696;
+  border: 1px solid #636363;
   outline: none;
   box-sizing: border-box;
   transition: all 0.3s ease;
 }
 
+.searchInput:hover {
+  box-shadow: 0 0 20px rgba(96, 31, 124, 0.831);
+}
 .searchInput:focus {
   border-color: #5c1d77;
   box-shadow: 0 0 20px rgba(92, 29, 119, 0.5);

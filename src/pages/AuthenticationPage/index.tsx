@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import { Login } from './Authentication/Login/Login'
-import style from './Forma.module.css'
-import { Register } from './Authentication/Register/Register';
+import style from './ui.module.css'
+import { Register } from '@/shared/ui/RegisterForm';
+import { Login } from '@/shared/ui/LoginForm';
 
 
-export const Forma = () => {
+export const AuthenticationPage = () => {
   const [isLogin, setIsLogin] = useState<boolean>(true);
 
   const switchForm = () => {

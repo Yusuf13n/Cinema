@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../../../Hooks";
-import { loginFailure, loginReqest, loginSicces } from "../../../../Redux/Slices/authSlice";
+import { useAppDispatch, useAppSelector } from "../../../hooks";
+import { loginFailure, loginReqest, loginSicces } from "../../../redux/slices/authSlice";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../FireBase/firebase.config";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { auth } from "@/shared/consts/firebase/firebase.config";
 import { faUser, faKey, faAt } from "@fortawesome/free-solid-svg-icons";
+
 import style from './ui.module.css';
 
 export const Login: React.FC<{switchForm: () => void}> = ({switchForm}) => {

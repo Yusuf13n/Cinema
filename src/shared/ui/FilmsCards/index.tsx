@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../../Hooks";
-import { fetchItems } from "../../../Redux/Slices/FilmsSlice";
+import { useAppDispatch, useAppSelector } from "../../../hooks";
+import { fetchItems } from "../../../redux/slices/FilmsSlice";
 import { useNavigate } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import style from "./Films.module.css";
+import style from "./ui.module.css";
 
 interface HandleOpenProps {
   handleOpen: (title: string) => void;
 }
 
-export const FilmsCard = ({ handleOpen }: HandleOpenProps) => {
+export const FilmsCards = ({ handleOpen }: HandleOpenProps) => {
   const films = useAppSelector((state) => state.films.films);
   const loading = useAppSelector((state) => state.films.loading);
   const dispatch = useAppDispatch();
