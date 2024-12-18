@@ -9,7 +9,7 @@ export const HomePage = ({ handleOpen }: handleOpenProps) => {
   return (
     <div>
       <HomeCarousel />
-      <FilmsCards handleOpen={handleOpen} />
+      <FilmsCards />
     </div>
   );
 };
