@@ -2,129 +2,23 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  
   padding: 40px;
-}
-
-.content {
-  display: flex;
-  justify-content: space-between;
-  width: 80%;
-  max-width: 1200px;
-}
-
-.imageContainer {
-  width: 40%;
-  padding-right: 20px;
-}
-
-.image {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.details {
-  width: 55%;
-  padding-left: 20px;
-  display: flex;
-  flex-direction: column;
-}
-
-.title {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-.rating {
-  font-size: 1.2rem;
-  color: #555;
-  margin-bottom: 15px;
-}
-
-.description {
-  font-size: 1rem;
-  color: #666;
-  margin-bottom: 30px;
-  line-height: 1.6;
-}
-
-.videoContainer {
-  width: 100%;
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-}
-
-iframe {
-  border-radius: 8px;
-}
-
-.reviewBlock {
-  margin-top: 40px;
-  padding: 30px;
-  background: linear-gradient(135deg, #2c3e50, #4ca1af);
-  border-radius: 12px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);
-  color: #fff;
-  width: 100%;
-}
-
-.reviewTitle {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.reviewInputContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.reviewInput {
-  width: 80%;
-  height: 100px;
-  border-radius: 8px;
-  border: none;
-  padding: 10px;
-  margin-bottom: 10px;
-  box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.2);
-  font-size: 1rem;
-}
-
-.submitReviewBtn {
-  padding: 10px 20px;
-  background-color: #ff9505;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 40px;
-  background-color: #1a0a2e;
   color: #ffffff;
 }
 
 .content {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-  width: 80%;
+  gap: 20px;
+  width: 100%;
   max-width: 1200px;
   margin-bottom: 40px;
 }
 
 .imageContainer {
-  width: 40%;
+  flex: 1 1 40%;
   padding-right: 20px;
 }
 
@@ -136,7 +30,7 @@ iframe {
 }
 
 .details {
-  width: 55%;
+  flex: 1 1 55%;
   padding-left: 20px;
   display: flex;
   flex-direction: column;
@@ -182,9 +76,12 @@ iframe {
   border: 2px solid #5c1d77;
   box-shadow: 0 0 20px rgba(92, 29, 119, 0.5);
   color: #ffffff;
-  text-align: center;
   position: relative;
   overflow: hidden;
+}
+
+.reviewBlock {
+  flex: 1 1 40%;
 }
 
 .reviewSection {
@@ -199,7 +96,7 @@ iframe {
   max-width: 500px;
   height: 100px;
   padding: 10px;
-  border: 2px solid #5c1d77; 
+  border: 2px solid #5c1d77;
   border-radius: 10px;
   background: #2a1e4d;
   color: #ffffff;
@@ -272,4 +169,62 @@ iframe {
 
 .loginPrompt button:hover {
   background-color: #7d259d;
+}
+
+@media (max-width: 1200px) {
+  .content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .imageContainer {
+    width: 100%;
+    padding-right: 0;
+  }
+
+  .details {
+    width: 100%;
+    padding-left: 0;
+    text-align: center;
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .reviewBlock {
+    margin: 20px 0;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .content {
+    padding: 20px;
+  }
+
+  .image {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .description {
+    text-align: start;
+  }
+
+  .reviewBlock {
+    padding: 15px;
+  }
+
+  .submitReviewBtn {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 450px) {
+  iframe {
+    height: 187px;
+    width: 340px;
+  }
 }

@@ -1,17 +1,21 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
-import { loginFailure, loginReqest, loginSicces } from "../../../redux/slices/authSlice";
+import {
+  loginFailure,
+  loginReqest,
+  loginSicces,
+} from "../../../redux/slices/authSlice";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { auth } from "@/shared/consts/firebase/firebase.config";
 import { faUser, faKey, faAt } from "@fortawesome/free-solid-svg-icons";
 
-import style from './ui.module.css';
+import style from "./ui.module.css";
 
-export const Login: React.FC<{switchForm: () => void}> = ({switchForm}) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+export const Login: React.FC<{ switchForm: () => void }> = ({ switchForm }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const { loading, error } = useAppSelector((state) => state.auth);
 
@@ -21,9 +25,17 @@ export const Login: React.FC<{switchForm: () => void}> = ({switchForm}) => {
   const handleLogin = async () => {
     dispatch(loginReqest());
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      dispatch(loginSicces(userCredential.user.email || ''));
-      navigate('/');
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      dispatch(
+        loginSicces({
+          email: userCredential.user.email,
+        })
+      );
+      navigate("/");
     } catch (err: any) {
       dispatch(loginFailure(err.message));
     }
@@ -35,28 +47,28 @@ export const Login: React.FC<{switchForm: () => void}> = ({switchForm}) => {
         <h1>Login</h1>
         <div className={style.inputGroup}>
           <FontAwesomeIcon icon={faAt} className={style.icon} />
-          <input 
-            className={style.input} 
-            type="email" 
+          <input
+            className={style.input}
+            type="email"
             placeholder="Email"
-            value={email} 
-            onChange={(e) => setEmail(e.target.value)} 
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div className={style.inputGroup}>
           <FontAwesomeIcon icon={faKey} className={style.icon} />
-          <input 
-            className={style.input} 
-            type="password" 
+          <input
+            className={style.input}
+            type="password"
             placeholder="Password"
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)} 
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <div className={style.btnWrapper}>
-          <button 
-            className={style.btn} 
-            onClick={handleLogin} 
+          <button
+            className={style.btn}
+            onClick={handleLogin}
             disabled={loading}
           >
             {loading ? "Login..." : "Login"}

@@ -13,53 +13,59 @@ interface handleCloseProps {
   title: string;
 }
 
+const ticketPrice = 250;
+
 export const Modal = ({ handleClose, title }: handleCloseProps) => {
   const [showConfirmation, setShowConfirmation] = useState<boolean>(false);
+  const [totalPrice, setTotalPrice] = useState<number>(0);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const seats = useAppSelector((state) => state.seats.seats);
-  const user = useAppSelector((state) => state.auth.user)
+  const user = useAppSelector((state) => state.auth.user);
 
-  // Функция для обновления состояния места в Firestore
-  const updateSeatStatusInFirestore = async (seatId: string, isBooked: boolean) => {
-    const seatRef = doc(db, "seats", seatId);  // Документ для конкретного места
+  const updateSeatStatusInFirestore = async (
+    seatId: string,
+    isBooked: boolean
+  ) => {
+    const seatRef = doc(db, "seats", seatId);
     await updateDoc(seatRef, { isBooked });
   };
 
-  // Функция для выбора места
   const handleSeatClick = (seatId: string) => {
     if (user) {
       dispatch(selectSeat(seatId));
-      updateSeatStatusInFirestore(seatId, true);  // Обновляем место как занятое в Firestore
     } else {
-      navigate('/Auth')
+      navigate("/Auth");
     }
   };
 
-  // Функция для бронирования мест
   const handleBooking = () => {
     setShowConfirmation(true);
   };
 
-  // Функция для подтверждения бронирования
   const handleConfirmBooking = () => {
     dispatch(bookSelectedSeats());
     setShowConfirmation(false);
     handleClose();
   };
 
-  // Реактивное обновление состояния мест из Firestore
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, "seats"), (snapshot) => {
-      const updatedSeats = snapshot.docs.map(doc => ({
+      const updatedSeats = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
-      dispatch({ type: "seats/updateSeats", payload: updatedSeats }); // Обновляем состояние в Redux
+      dispatch({ type: "seats/updateSeats", payload: updatedSeats });
     });
 
     return () => unsubscribe();
   }, [dispatch]);
+
+  useEffect(() => {
+    const selectedSeats = seats.filter((seat) => seat.isSelected);
+    const price = selectedSeats.length * ticketPrice;
+    setTotalPrice(price);
+  }, [seats]);
 
   return (
     <div className={style.containerModal}>
@@ -85,16 +91,21 @@ export const Modal = ({ handleClose, title }: handleCloseProps) => {
                   onClick={() => {
                     handleSeatClick(seat.id);
                   }}
-                  disabled={seat.isBooked}  // Место заблокировано, если оно занято
+                  disabled={seat.isBooked}
                 >
                   {seat.id}
                 </button>
               ))}
             </div>
           </div>
-          <button onClick={handleBooking} className={style.bookButton}>
-            Reserve
-          </button>
+          <div className={style.modalBottom}>
+            <div className={style.priceContainer}>
+              <h4>Total Price: {totalPrice} ₽</h4>
+            </div>
+            <button onClick={handleBooking} className={style.bookButton} disabled={!selectSeat}>
+              Reserve
+            </button>
+          </div>
         </div>
       </div>
       {showConfirmation && <ModalPay />}

@@ -1,40 +1,44 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit"
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface AuthState {
-    user: {email: string; name: string} | null,
-    loading: boolean,
-    error: string | null
+  user: users | null;
+  loading: boolean;
+  error: string | null;
+}
+
+interface users {
+  email: string | null,
+  name?: string | null,
 }
 
 const initialState: AuthState = {
-    user: null,
-    loading: false,
-    error: null
-}
-
+  user: null,
+  loading: false,
+  error: null,
+};
 
 const authSlice = createSlice({
-    name: 'authentication',
-    initialState,
-    reducers: {
-        loginReqest: (state) => {
-            state.loading = true;
-            state.error = null;
-        },
-        loginSicces: (state, action: PayloadAction<{email: string; name: string}>) => {
-            state.loading = false;
-            state.user = action.payload;
-        },
-        loginFailure: (state, action: PayloadAction<string>) => {
-            state.loading = false;
-            state.error = action.payload;
-        },
-        logout: (state) => {
-            state.user = null;
-        }
-    }
-})
+  name: "authentication",
+  initialState,
+  reducers: {
+    loginReqest: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    loginSicces: (state, action: PayloadAction<users>) => {
+      state.loading = false;
+      state.user = action.payload;
+    },
+    loginFailure: (state, action: PayloadAction<string>) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+    logout: (state) => {
+      state.user = null;
+    },
+  },
+});
 
-
-export const { loginReqest, loginSicces, loginFailure, logout  } = authSlice.actions;
+export const { loginReqest, loginSicces, loginFailure, logout } =
+  authSlice.actions;
 export const authReducer = authSlice.reducer;

@@ -102,3 +102,33 @@
   font-size: 14px;
   color: #bdc3c7;
 }
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 20px 10px;
+  }
+
+  .logo {
+    font-size: 20px;
+  }
+
+  .description {
+    font-size: 12px;
+  }
+
+  .sectionTitle {
+    font-size: 14px;
+  }
+
+  .link {
+    font-size: 12px;
+  }
+
+  .contactInfo {
+    font-size: 12px;
+  }
+
+  .icon {
+    font-size: 18px;
+  }
+}

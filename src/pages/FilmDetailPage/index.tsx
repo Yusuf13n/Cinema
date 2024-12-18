@@ -4,8 +4,9 @@ import { RootState } from "../../redux/store";
 import { db, auth } from "../../shared/consts/firebase/firebase.config"; // Импортируем настройки Firebase
 import { collection, addDoc, query, where, onSnapshot } from "firebase/firestore"; // Импортируем Firestore методы
 import { User, onAuthStateChanged } from "firebase/auth"; // Импортируем нужные методы Firebase
-import { useAppSelector } from "../../hooks";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 import { useEffect, useState } from "react";
+import { fetchItems } from "../../redux/slices/filmsSlice";
 
 import style from "./ui.module.css";
 
@@ -15,13 +16,17 @@ interface Reviev {
   userEmail: string;
 }
 
-export const FilmDetailPage = () => {
+interface HandleOpenProps {
+  handleOpen: (title: string) => void;
+}
+
+export const FilmDetailPage = ({ handleOpen }: HandleOpenProps) => {
   const { id } = useParams<{ id: string }>();
   const [reviews, setReviews] = useState<Reviev[]>([]);
   const [newReview, setNewReview] = useState<string>("");
 
   const user = useAppSelector((state) => state.auth.user);
-
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const film = useSelector((state: RootState) =>
@@ -29,18 +34,32 @@ export const FilmDetailPage = () => {
   );
 
   useEffect(() => {
+    dispatch(fetchItems());
+  }, [dispatch]);
+
+  useEffect(() => {
     if (id) {
       const reviewsCollection = collection(db, "reviews");
       const q = query(reviewsCollection, where("filmId", "==", id));
-  
+
       const unsubscribe = onSnapshot(q, (querySnapshot) => {
-        const reviewsData: { review: string; userName: string; userEmail: string }[] = [];
+        const reviewsData: {
+          review: string;
+          userName: string;
+          userEmail: string;
+        }[] = [];
         querySnapshot.forEach((doc) => {
-          reviewsData.push(doc.data() as { review: string; userName: string; userEmail: string });
+          reviewsData.push(
+            doc.data() as {
+              review: string;
+              userName: string;
+              userEmail: string;
+            }
+          );
         });
-        setReviews(reviewsData); // Теперь setReviews ожидает массив объектов
+        setReviews(reviewsData);
       });
-  
+
       return () => unsubscribe();
     }
   }, [id]);
@@ -62,12 +81,12 @@ export const FilmDetailPage = () => {
         alert("Вы должны быть авторизованы, чтобы оставить отзыв!");
         return;
       }
-      
+
       await addDoc(collection(db, "reviews"), {
         filmId: id,
         review: newReview,
         userEmail: user.email || "",
-        userName: user?.name || "Anonymous", 
+        userName: user?.name || "Anonymous",
         timestamp: new Date(),
       });
 
@@ -96,6 +115,11 @@ export const FilmDetailPage = () => {
           <h1 className={style.title}>{film.title}</h1>
           <p className={style.rating}>Rating: {film.rating}</p>
           <p className={style.description}>{film.description}</p>
+          <button
+            onClick={() => handleOpen(film.title)}
+          >
+            Tickets
+          </button>
 
           <div className={style.videoContainer}>
             <iframe
