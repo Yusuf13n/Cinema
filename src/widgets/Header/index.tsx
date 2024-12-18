@@ -29,7 +29,7 @@ export const Header = () => {
   };
 
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+    setIsMenuOpen((prevState) => !prevState);
   };
 
   return (
@@ -46,17 +46,6 @@ export const Header = () => {
           </li>
           <li>
             <Link to="/films">Films</Link>
-            <ul>
-              <li>
-                <Link to="/films/action">Action</Link>
-              </li>
-              <li>
-                <Link to="/films/drama">Drama</Link>
-              </li>
-              <li>
-                <Link to="/films/comedy">Comedy</Link>
-              </li>
-            </ul>
           </li>
           <li>
             <Link to="/about">About</Link>
@@ -78,8 +67,13 @@ export const Header = () => {
             </button>
           )}
         </div>
-        <button className={style.burgerButton} onClick={toggleMenu}>
-          ☰
+        <button
+          className={`${style.burgerButton} ${isMenuOpen ? style.active : ""}`}
+          onClick={toggleMenu}
+        >
+          <span className={style.bar}></span>
+          <span className={style.bar}></span>
+          <span className={style.bar}></span>
         </button>
       </div>
     </header>

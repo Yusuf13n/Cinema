@@ -6,17 +6,15 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import style from "./ui.module.css";
 
-interface HandleOpenProps {
-  handleOpen: (title: string) => void;
-}
 
-export const FilmsCards = ({ handleOpen }: HandleOpenProps) => {
+export const FilmsCards = () => {
   const films = useAppSelector((state) => state.films.films);
   const loading = useAppSelector((state) => state.films.loading);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [hoverColor, setHoverColor] = useState<string>("default");
 
   useEffect(() => {
     dispatch(fetchItems());
@@ -34,8 +32,17 @@ export const FilmsCards = ({ handleOpen }: HandleOpenProps) => {
     setSearchQuery(event.target.value);
   };
 
+  const getRatingColor = (rating: number) => {
+    if (rating >= 7) return style.highRating;
+    if (rating >= 5) return style.mediumRating;
+    return style.lowRating;
+  };
+
   return (
     <div className={style.container}>
+      <div className={style.titleUp}>
+        <h2>Now in cinemas</h2>
+      </div>
       <div className={style.inputFilterContain}>
         <div className={style.searchWrapper}>
           <input
@@ -48,14 +55,16 @@ export const FilmsCards = ({ handleOpen }: HandleOpenProps) => {
         </div>
 
         <div className={style.filterWrapper}>
-          <select className={style.genreSelect}>
-            <option value="">Genre</option>
-            <option value="action">Action</option>
-            <option value="comedy">Comedy</option>
-            <option value="drama">Drama</option>
-            <option value="horror">Horror</option>
-            <option value="romance">Romance</option>
-          </select>
+          <div className={style.dropdown}>
+            <button className={style.dropdownButton}>Genre</button>
+            <ul className={style.dropdownMenu}>
+              <li>Action</li>
+              <li>Comedy</li>
+              <li>Drama</li>
+              <li>Horror</li>
+              <li>Romance</li>
+            </ul>
+          </div>
         </div>
       </div>
 
@@ -74,21 +83,28 @@ export const FilmsCards = ({ handleOpen }: HandleOpenProps) => {
       ) : (
         <ul className={style.cardList}>
           {filteredFilms.map((film) => (
-            <div key={film.id} className={style.card}>
-              <img
-                src={film.imageUrl}
-                alt={film.title}
-                className={style.image}
-                onClick={() => handleCardClick(film.id)}
-              />
-              <div className={style.infoBlock}>
-                <h3 className={style.title}>{film.title}</h3>
-                <button
+            <div key={film.id} className={`${style.card} ${style[hoverColor]}`}>
+              <div className={style.imageContainer}>
+                <img
+                  src={film.imageUrl}
+                  alt={film.title}
+                  className={style.image}
+                  onClick={() => handleCardClick(film.id)}
+                />
+                <span
+                  className={`${style.rating} ${getRatingColor(film.rating)}`}
+                >
+                  {film.rating}
+                </span>
+              </div>
+              <div className={style.cardBottom}>
+                <div className={style.title}>{film.title}</div>
+                {/* <button
                   className={style.btnInfoBlock}
                   onClick={() => handleOpen(film.title)}
                 >
                   Tickets
-                </button>
+                </button> */}
               </div>
             </div>
           ))}
