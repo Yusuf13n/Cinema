@@ -9,17 +9,24 @@ import {
 } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 
-export const ModalPay: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(true);
+// Добавляем типы для пропсов
+interface ModalPayProps {
+  onConfirmBooking: () => void;
+}
 
-  const handleClose = () => setIsOpen(false);
+export const ModalPay: React.FC<ModalPayProps> = ({ onConfirmBooking, }) => {
+  const [isOpen, setIsOpen] = useState<boolean>(true);
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
 
   if (!isOpen) return null;
 
   return (
     <div className={style.overlay}>
       <div className={style.modal}>
-        <button className={style.closeButton} onClick={handleClose}>
+        <button className={style.closeButton} onClick={closeModal}>
           <MdClose size={24} />
         </button>
         <h2 className={style.title}>Payment for the ticket</h2>
@@ -76,7 +83,7 @@ export const ModalPay: React.FC = () => {
               className={style.input}
             />
           </div>
-          <button type="submit" className={style.submitButton}>
+          <button type="button" className={style.submitButton} onClick={onConfirmBooking}>
             Pay
           </button>
         </form>
