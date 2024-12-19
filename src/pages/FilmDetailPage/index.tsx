@@ -1,9 +1,15 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
-import { db, auth } from "../../shared/consts/firebase/firebase.config"; // Импортируем настройки Firebase
-import { collection, addDoc, query, where, onSnapshot } from "firebase/firestore"; // Импортируем Firestore методы
-import { User, onAuthStateChanged } from "firebase/auth"; // Импортируем нужные методы Firebase
+import { db, auth } from "../../shared/consts/firebase/firebase.config";
+import {
+  collection,
+  addDoc,
+  query,
+  where,
+  onSnapshot,
+} from "firebase/firestore";
+import { User, onAuthStateChanged } from "firebase/auth";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { useEffect, useState } from "react";
 import { fetchItems } from "../../redux/slices/filmsSlice";
@@ -114,8 +120,10 @@ export const FilmDetailPage = ({ handleOpen }: HandleOpenProps) => {
         <div className={style.details}>
           <h1 className={style.title}>{film.title}</h1>
           <p className={style.rating}>Rating: {film.rating}</p>
+          <p className={style.restrictions}>{film.restrictions}</p>
           <p className={style.description}>{film.description}</p>
           <button
+            className={style.ticketsButton}
             onClick={() => handleOpen(film.title)}
           >
             Tickets
@@ -123,8 +131,8 @@ export const FilmDetailPage = ({ handleOpen }: HandleOpenProps) => {
 
           <div className={style.videoContainer}>
             <iframe
-              width="560"
-              height="315"
+              width="750"
+              height="400"
               src={film.srcVideo}
               title="Film Trailer"
               frameBorder="0"
@@ -136,7 +144,7 @@ export const FilmDetailPage = ({ handleOpen }: HandleOpenProps) => {
       </div>
 
       <div className={style.reviewBlock}>
-        <h3>Оставьте свой отзыв:</h3>
+        <h3>Leave your review:</h3>
         {user ? (
           <div className={style.reviewSection}>
             <textarea
@@ -151,15 +159,15 @@ export const FilmDetailPage = ({ handleOpen }: HandleOpenProps) => {
           </div>
         ) : (
           <div className={style.loginPrompt}>
-            <p>Чтобы оставить отзыв, вам необходимо войти в систему.</p>
-            <button onClick={handleLogin}>Авторизоваться</button>
+            <p>Log in to leave a review</p>
+            <button onClick={handleLogin}>Log in</button>
           </div>
         )}
 
         <div className={style.reviews}>
-          <h3>Отзывы пользователей:</h3>
+          <h3>User reviews:</h3>
           {reviews.length === 0 ? (
-            <p>Пока нет отзывов. Оставьте свой отзыв первым!</p>
+            <p>Be the first to review !</p>
           ) : (
             reviews.map((review, index) => (
               <div key={index} className={style.reviewCard}>

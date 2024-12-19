@@ -102,7 +102,7 @@ export const Modal = ({ handleClose, title }: handleCloseProps) => {
             <div className={style.priceContainer}>
               <h4>Total Price: {totalPrice} ₽</h4>
             </div>
-            <button onClick={handleBooking} className={style.bookButton} disabled={!selectSeat}>
+            <button onClick={handleBooking} className={style.bookButton} >
               Reserve
             </button>
           </div>

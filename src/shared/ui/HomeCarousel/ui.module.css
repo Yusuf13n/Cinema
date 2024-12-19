@@ -57,6 +57,13 @@
     animation: zoomInOut 12s ease-in-out infinite;
   }
 
+  @media (max-width: 600px) {
+    .carousel img {
+      width: 100%;
+      height: 300px;
+    }
+  }
+
   @media (max-width: 450px) {
     .carousel {
       width: 94%;

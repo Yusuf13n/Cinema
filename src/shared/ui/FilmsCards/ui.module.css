@@ -25,7 +25,7 @@
   max-width: 200px;
   padding: 10px 20px;
   font-size: 14px;
-  border-radius: 20px;
+  border-radius: 19px;
   border: 1px solid #aaa;
   outline: none;
   background-color: transparent;
@@ -44,34 +44,52 @@
   position: relative;
 }
 
+.dropdown {
+  position: relative;
+}
+
 .dropdownButton {
-  padding: 10px 20px;
-  font-size: 16px;
   background-color: #5c1d77;
-  color: white;
+  letter-spacing: 1px;
+  color: #dbdbdb;
   border: none;
-  border-radius: 20px;
+  padding: 10px 24px;
   cursor: pointer;
-  transition: 0.3s ease;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
 }
 
 .dropdownButton:hover {
-  background-color: #4a1455;
+  background-color: #73218e;
 }
 
 .dropdownMenu {
   position: absolute;
-  top: 50px;
+  top: 100%;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.697);
-  backdrop-filter: blur(10px);
-  list-style: none;
-  padding: 10px 0;
-  border-radius: 10px;
-  display: none;
-  z-index: 1000;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 7px;
+  overflow: hidden;
+  z-index: 10;
+  margin-top: 5px;
 }
+
+.dropdownItem {
+  padding: 8px 14px;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.669);
+  backdrop-filter: blur(5px);
+  letter-spacing: 1px;
+  color: #5c1d77;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdownItem:hover {
+  background-color: #5c1d77;
+  color: white;
+}
+
 
 .filterWrapper:hover .dropdownMenu {
   display: block;
@@ -86,7 +104,6 @@
 
 .dropdownMenu li:hover {
   background-color: #5c1d77;
-  border-radius: 8px;
 }
 
 .cardList {
@@ -117,6 +134,11 @@
   object-fit: cover;
   display: block;
   border-radius: 10px;
+  cursor: pointer;
+  transition: 0.4s ease;
+}
+.image:hover {
+  transform: scale(1.05);
 }
 
 .rating {
@@ -185,6 +207,7 @@
   border-radius: 10px;
 }
 
+
 @media (max-width: 880px) {
   .titleUp {
     font-size: 24px;
@@ -198,16 +221,46 @@
     margin-bottom: 15px;
   }
 
+  .searchInput {
+    padding: 10px 15px;
+  }
+
+  .cardList {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 30px;
+  }
+
+  .card {
+    max-width: 285px;
+    max-height: 470px;
+  }
+
+  .rating {
+    padding: 5px 12px;
+  }
+
+  .title {
+    font-size: 17px;
+    font-weight: bold;
+  }
+
   .inputFilterContain {
     justify-content: space-around;
+    gap: 70px;
   }
 
   .searchInput {
-    padding: 7px 17px;
+    max-width: 110px;
+  }
+  .searchInput:focus {
+    max-width: 200px;
   }
 
   .dropdownButton {
-    padding: 7px 19px
+    padding: 9px 20px;
   }
 
   .filterWrapper {
@@ -215,8 +268,23 @@
   }
 }
 
-@media (max-width: 450px) {
-  .dropdownButton {
-    display: none;
+@media (max-width: 640px) {
+  .titleUp {
+    font-size: 18px;
+  }
+  .card {
+    max-width: 220px;
+    max-height: 400px;
+  }
+}
+
+@media (max-width: 511px) {
+  .cardList {
+    gap: 25px;
+  }
+
+  .card {
+    max-width: 185px;
+    max-height: 350px;
   }
 }
