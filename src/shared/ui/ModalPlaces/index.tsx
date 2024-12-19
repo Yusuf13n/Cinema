@@ -23,30 +23,32 @@ export const Modal = ({ handleClose, title }: handleCloseProps) => {
   const seats = useAppSelector((state) => state.seats.seats);
   const user = useAppSelector((state) => state.auth.user);
 
-  const updateSeatStatusInFirestore = async (
-    seatId: string,
-    isBooked: boolean
-  ) => {
+  const updateSeatStatusInFirestore = async (seatId: string, isBooked: boolean) => {
     const seatRef = doc(db, "seats", seatId);
     await updateDoc(seatRef, { isBooked });
   };
 
   const handleSeatClick = (seatId: string) => {
-    if (user) {
+    // if (user) {
       dispatch(selectSeat(seatId));
-    } else {
-      navigate("/Auth");
-    }
+    // } else {
+      // navigate("/Auth");
+    // }
   };
 
   const handleBooking = () => {
-    setShowConfirmation(true);
+    const selectedSeats = seats.filter((seat) => seat.isSelected);
+    if (selectedSeats.length > 0) {
+      setShowConfirmation(true); // Показываем ModalPay, если хотя бы одно место выбрано
+    } else {
+      alert("Пожалуйста, выберите место");
+    }
   };
 
   const handleConfirmBooking = () => {
     dispatch(bookSelectedSeats());
-    setShowConfirmation(false);
-    handleClose();
+    setShowConfirmation(false); // Скрываем подтверждение после бронирования
+    handleClose(); // Закрываем модальное окно
   };
 
   useEffect(() => {
@@ -81,16 +83,8 @@ export const Modal = ({ handleClose, title }: handleCloseProps) => {
               {seats.map((seat) => (
                 <button
                   key={seat.id}
-                  className={`${style.seat} ${
-                    seat.isBooked
-                      ? style.booked
-                      : seat.isSelected
-                      ? style.selected
-                      : ""
-                  }`}
-                  onClick={() => {
-                    handleSeatClick(seat.id);
-                  }}
+                  className={`${style.seat} ${seat.isBooked ? style.booked : seat.isSelected ? style.selected : ""}`}
+                  onClick={() => handleSeatClick(seat.id)}
                   disabled={seat.isBooked}
                 >
                   {seat.id}
@@ -102,13 +96,13 @@ export const Modal = ({ handleClose, title }: handleCloseProps) => {
             <div className={style.priceContainer}>
               <h4>Total Price: {totalPrice} ₽</h4>
             </div>
-            <button onClick={handleBooking} className={style.bookButton} disabled={!selectSeat}>
+            <button onClick={handleBooking} className={style.bookButton}>
               Reserve
             </button>
           </div>
         </div>
       </div>
-      {showConfirmation && <ModalPay />}
+      {showConfirmation && <ModalPay onConfirmBooking={handleConfirmBooking} />}
     </div>
   );
 };

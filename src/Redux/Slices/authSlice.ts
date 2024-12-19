@@ -1,5 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
+// Интерфейсы
 interface AuthState {
   user: users | null;
   loading: boolean;
@@ -7,12 +8,12 @@ interface AuthState {
 }
 
 interface users {
-  email: string | null,
-  name?: string | null,
+  email: string | null;
+  name?: string | null;
 }
 
 const initialState: AuthState = {
-  user: null,
+  user: JSON.parse(localStorage.getItem("user") || "null"), 
   loading: false,
   error: null,
 };
@@ -28,6 +29,7 @@ const authSlice = createSlice({
     loginSicces: (state, action: PayloadAction<users>) => {
       state.loading = false;
       state.user = action.payload;
+      localStorage.setItem("user", JSON.stringify(action.payload));
     },
     loginFailure: (state, action: PayloadAction<string>) => {
       state.loading = false;
@@ -35,10 +37,10 @@ const authSlice = createSlice({
     },
     logout: (state) => {
       state.user = null;
+      localStorage.removeItem("user");
     },
   },
 });
 
-export const { loginReqest, loginSicces, loginFailure, logout } =
-  authSlice.actions;
+export const { loginReqest, loginSicces, loginFailure, logout } = authSlice.actions;
 export const authReducer = authSlice.reducer;
