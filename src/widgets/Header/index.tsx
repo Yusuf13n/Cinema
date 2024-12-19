@@ -35,7 +35,9 @@ export const Header = () => {
   return (
     <header className={style.header}>
       <div className={style.logoContainer}>
-        <h1>Cinema</h1>
+        <Link to="/">
+          <h1>Cinema</h1>
+        </Link>
       </div>
       <nav
         className={`${style.navContainer} ${isMenuOpen ? style.navOpen : ""}`}
@@ -45,13 +47,19 @@ export const Header = () => {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/films">Films</Link>
+            <a href="#" onClick={(e) => e.preventDefault()}>
+              Films
+            </a>
           </li>
           <li>
-            <Link to="/about">About</Link>
+            <a href="#" onClick={(e) => e.preventDefault()}>
+              About
+            </a>
           </li>
           <li>
-            <Link to="/contact">Contact</Link>
+            <a href="#" onClick={(e) => e.preventDefault()}>
+              Contact
+            </a>
           </li>
         </ul>
       </nav>

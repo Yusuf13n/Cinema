@@ -1,7 +1,8 @@
 .header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
+  gap: 90px;
   margin: 5px 150px;
   padding: 15px;
 }
@@ -14,6 +15,9 @@
   text-transform: uppercase;
   letter-spacing: 2px;
   -webkit-text-stroke: 2px #7f0b8c;
+}
+.logoContainer a {
+  text-decoration: none;
 }
 
 .actionsContainer {
@@ -84,8 +88,8 @@
   align-items: center;
   justify-content: center;
   gap: 30px;
-  max-width: 230px;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  max-width: 200px;
+  transition: 0.3s ease, transform 0.3s ease;
 }
 
 .navOpen {
@@ -121,7 +125,7 @@
 
 .navList li a:hover {
   color: #a21cb0;
-  background-color: #641d6c3f;
+  text-shadow: 0 0 15px #a21cb0;
 }
 
 .navList li ul {
@@ -150,7 +154,6 @@
 }
 
 .navList li ul li a:hover {
-  background-color: rgba(150, 21, 164, 0.1);
   color: #9615a4;
 }
 
@@ -176,6 +179,14 @@
   .header {
     margin: 5px 50px;
   }
+  .navList li a {
+    font-size: 15px;
+  }
+  .loginButton {
+    padding: 10px 23px;
+    font-size: 16px;
+    width: 100%;
+  }
 }
 
 @media (max-width: 900px) {
@@ -186,6 +197,9 @@
     font-size: 26px;
     font-weight: 500;
   }
+  .navList li a {
+    font-size: 14px;
+  }
   .loginButton {
     padding: 9px 21px;
     font-size: 15px;
@@ -195,7 +209,8 @@
 
 @media (max-width: 780px) {
   .header {
-    margin: 5px 5px;
+    margin: 5px 10px;
+    justify-content: space-between;
   }
 
   .logoContainer h1 {
@@ -216,8 +231,8 @@
     background-color: rgba(0, 0, 0, 0.603);
     backdrop-filter: blur(8px);
     height: 200px;
-    width: 190px;
-    padding: 20px;
+    width: 170px;
+    padding: 10px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     z-index: 1000;

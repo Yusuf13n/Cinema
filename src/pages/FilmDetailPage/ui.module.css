@@ -11,9 +11,9 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 20px;
+  gap: 50px;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1400px;
   margin-bottom: 40px;
 }
 
@@ -37,7 +37,7 @@
 }
 
 .title {
-  font-size: 2rem;
+  font-size: 28px;
   font-weight: bold;
   color: #cccccc;
   margin-bottom: 20px;
@@ -46,21 +46,47 @@
 .rating {
   font-size: 1.2rem;
   color: #cccccc;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
+}
+
+.restrictions {
+  width: 40px;
+  height: 30px;
+  padding: 3px;
+  margin-bottom: 10px;
+  text-align: center;
+  letter-spacing: 1px;
+  border-radius: 4px;
+  background-color: rgba(128, 128, 128, 0.39);
 }
 
 .description {
   font-size: 1rem;
   color: #cccccc;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
   line-height: 1.6;
+}
+
+.ticketsButton {
+  width: 120px;
+  height: 42px;
+  font-size: 17px;
+  letter-spacing: 1px;
+  background-color: #5c1d77;
+  color: white;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: 0.4s ease;
+}
+.ticketsButton:hover {
+  opacity: 0.8;
 }
 
 .videoContainer {
   width: 100%;
-  margin-top: 20px;
+  margin-top: 25px;
   display: flex;
-  justify-content: center;
 }
 
 iframe {
@@ -68,9 +94,9 @@ iframe {
 }
 
 .reviewBlock {
-  margin: 30px auto;
   padding: 20px;
-  max-width: 600px;
+  width: 650px;
+  margin-top: 100px;
   background: transparent;
   border-radius: 10px;
   border: 2px solid #5c1d77;
@@ -178,7 +204,7 @@ iframe {
   }
 
   .imageContainer {
-    width: 100%;
+    width: 70%;
     padding-right: 0;
   }
 
@@ -203,8 +229,13 @@ iframe {
     padding: 20px;
   }
 
+  .imageContainer {
+    width: 80%;
+    padding-right: 0;
+  }
+
   .image {
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
   }
 

@@ -1,21 +1,61 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
-import {
-  loginFailure,
-  loginReqest,
-  loginSicces,
-} from "../../../redux/slices/authSlice";
+import { loginFailure, loginReqest, loginSicces } from "../../../redux/slices/authSlice";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { auth } from "@/shared/consts/firebase/firebase.config";
-import { faUser, faKey, faAt } from "@fortawesome/free-solid-svg-icons";
+import { faKey, faAt } from "@fortawesome/free-solid-svg-icons";
 
 import style from "./ui.module.css";
+import { Button, message } from "antd";
 
 export const Login: React.FC<{ switchForm: () => void }> = ({ switchForm }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const [loadings, setLoadings] = useState<boolean[]>([]);
+
+  const [messageApi, contextHolder] = message.useMessage();
+  const key = "updatable";
+
+  const openMessage = () => {
+    messageApi.open({
+      key,
+      type: "loading",
+      content: "Loading...",
+    });
+    setTimeout(() => {
+      messageApi.open({
+        key,
+        type: "success",
+        content: "Loaded!",
+        duration: 2,
+      });
+    }, 2000);
+  };
+
+  const enterLoading = (index: number) => {
+    setLoadings((prevLoadings) => {
+      const newLoadings = [...prevLoadings];
+      newLoadings[index] = true;
+      return newLoadings;
+    });
+
+    setTimeout(() => {
+      setLoadings((prevLoadings) => {
+        const newLoadings = [...prevLoadings];
+        newLoadings[index] = false;
+        return newLoadings;
+      });
+    }, 2000);
+  };
+
+  const hanleClickLoad = () => {
+    enterLoading(0);
+    handleLogin();
+    openMessage();
+  };
 
   const { loading, error } = useAppSelector((state) => state.auth);
 
@@ -35,7 +75,7 @@ export const Login: React.FC<{ switchForm: () => void }> = ({ switchForm }) => {
           email: userCredential.user.email,
         })
       );
-      navigate("/");
+      // navigate("/");
     } catch (err: any) {
       dispatch(loginFailure(err.message));
     }
@@ -66,13 +106,16 @@ export const Login: React.FC<{ switchForm: () => void }> = ({ switchForm }) => {
           />
         </div>
         <div className={style.btnWrapper}>
-          <button
+          {contextHolder}
+          <Button
+            type="primary"
             className={style.btn}
-            onClick={handleLogin}
+            loading={loadings[0]}
+            onClick={hanleClickLoad}
             disabled={loading}
           >
             {loading ? "Login..." : "Login"}
-          </button>
+          </Button>
         </div>
         <p className={style.switchText}>
           Don't have an account? <span onClick={switchForm}>Sign up</span>

@@ -6,7 +6,6 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import style from "./ui.module.css";
 
-
 export const FilmsCards = () => {
   const films = useAppSelector((state) => state.films.films);
   const loading = useAppSelector((state) => state.films.loading);
@@ -15,6 +14,8 @@ export const FilmsCards = () => {
 
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [hoverColor, setHoverColor] = useState<string>("default");
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc" | "none">("none");
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   useEffect(() => {
     dispatch(fetchItems());
@@ -24,12 +25,27 @@ export const FilmsCards = () => {
     navigate(`/film/${id}`);
   };
 
-  const filteredFilms = films.filter((film) =>
-    film.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredFilms = films
+    .filter((film) =>
+      film.title.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+    .sort((a, b) => {
+      if (sortOrder === "asc") return a.rating - b.rating;
+      if (sortOrder === "desc") return b.rating - a.rating;
+      return 0;
+    });
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
+  };
+
+  const toggleDropdown = () => {
+    setDropdownOpen((prev) => !prev);
+  };
+
+  const selectSortOrder = (order: "asc" | "desc" | "none") => {
+    setSortOrder(order);
+    setDropdownOpen(false);
   };
 
   const getRatingColor = (rating: number) => {
@@ -56,14 +72,31 @@ export const FilmsCards = () => {
 
         <div className={style.filterWrapper}>
           <div className={style.dropdown}>
-            <button className={style.dropdownButton}>Genre</button>
-            <ul className={style.dropdownMenu}>
-              <li>Action</li>
-              <li>Comedy</li>
-              <li>Drama</li>
-              <li>Horror</li>
-              <li>Romance</li>
-            </ul>
+            <button className={style.dropdownButton} onClick={toggleDropdown}>
+              Rating
+            </button>
+            {dropdownOpen && (
+              <ul className={style.dropdownMenu}>
+                <li
+                  className={style.dropdownItem}
+                  onClick={() => selectSortOrder("asc")}
+                >
+                  Ascending
+                </li>
+                <li
+                  className={style.dropdownItem}
+                  onClick={() => selectSortOrder("desc")}
+                >
+                  Descending
+                </li>
+                <li
+                  className={style.dropdownItem}
+                  onClick={() => selectSortOrder("none")}
+                >
+                  Stock
+                </li>
+              </ul>
+            )}
           </div>
         </div>
       </div>
@@ -99,12 +132,6 @@ export const FilmsCards = () => {
               </div>
               <div className={style.cardBottom}>
                 <div className={style.title}>{film.title}</div>
-                {/* <button
-                  className={style.btnInfoBlock}
-                  onClick={() => handleOpen(film.title)}
-                >
-                  Tickets
-                </button> */}
               </div>
             </div>
           ))}

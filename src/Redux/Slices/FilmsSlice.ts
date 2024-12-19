@@ -8,6 +8,7 @@ interface ItemsFetch {
   rating: number;
   data: string;
   description: string;
+  restrictions: string;
 }
 
 interface State {
