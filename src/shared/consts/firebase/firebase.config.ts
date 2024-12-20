@@ -1,15 +1,15 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from 'firebase/auth';
-import { getFirestore, collection, doc, updateDoc, onSnapshot } from 'firebase/firestore';
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, GoogleAuthProvider  } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDZ55s4exZ9JIPj8yEV5TqT53_5scGph_4",
-  authDomain: "authorization-61e89.firebaseapp.com",
-  projectId: "authorization-61e89",
-  storageBucket: "authorization-61e89.firebasestorage.app",
-  messagingSenderId: "152406053231",
-  appId: "1:152406053231:web:b61bd06bcf96c70f15d89a",
-  measurementId: "G-KTGDK4ESET"
+  apiKey: import.meta.env.VITE_API_KEY,
+  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_PROJECTID,
+  storageBucket: import.meta.env.VITE_STORAGEBUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGINGSENDERID,
+  appId: import.meta.env.VITE_APPID,
+  measurementId: import.meta.env.VITE_MEASUREMENTID
 };
 
 // Инициализация Firebase
@@ -19,4 +19,5 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
+export const googleProvider = new GoogleAuthProvider();
 export { auth, db, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut };

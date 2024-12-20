@@ -2,19 +2,14 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { db, auth } from "../../shared/consts/firebase/firebase.config";
-import {
-  collection,
-  addDoc,
-  query,
-  where,
-  onSnapshot,
-} from "firebase/firestore";
+import { collection, addDoc, query, where, onSnapshot } from "firebase/firestore";
 import { User, onAuthStateChanged } from "firebase/auth";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { useEffect, useState } from "react";
-import { fetchItems } from "../../redux/slices/filmsSlice";
+import { fetchItems } from "../../redux/slices/FilmsSlice";
 
 import style from "./ui.module.css";
+import { Rate } from "antd";
 
 interface Reviev {
   review: string;
@@ -122,9 +117,13 @@ export const FilmDetailPage = ({ handleOpen }: HandleOpenProps) => {
           <p className={style.rating}>Rating: {film.rating}</p>
           <p className={style.restrictions}>{film.restrictions}</p>
           <p className={style.description}>{film.description}</p>
+          <Rate className={style.rate} allowHalf defaultValue={2.5} />
           <button
             className={style.ticketsButton}
-            onClick={() => handleOpen(film.title)}
+            onClick={() => {
+              handleOpen(film.title);
+              !user ? handleLogin() : false;
+            }}
           >
             Tickets
           </button>

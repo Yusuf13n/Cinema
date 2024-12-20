@@ -19,7 +19,7 @@ export const Router = () => {
   };
   return (
     <Routes>
-      <Route path="/" element={<HomePage handleOpen={handleOpen} />} />{" "}
+      <Route path="/" element={<HomePage />} />{" "}
       <Route
         path="/film/:id"
         element={

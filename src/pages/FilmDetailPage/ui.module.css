@@ -38,6 +38,7 @@
 
 .title {
   font-size: 28px;
+  text-align: center;
   font-weight: bold;
   color: #cccccc;
   margin-bottom: 20px;
@@ -63,13 +64,18 @@
 .description {
   font-size: 1rem;
   color: #cccccc;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
   line-height: 1.6;
+}
+
+.rate {
+  margin-bottom: 10px;
 }
 
 .ticketsButton {
   width: 120px;
   height: 42px;
+  margin-top: 10px;
   font-size: 17px;
   letter-spacing: 1px;
   background-color: #5c1d77;

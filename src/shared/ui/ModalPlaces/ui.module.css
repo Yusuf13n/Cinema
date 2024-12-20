@@ -22,10 +22,28 @@
   }
 }
 
+.screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 40px;
+  background: #222;
+  border-radius: 20px 20px 2px 2px;
+  color: rgb(216, 216, 216);
+  text-align: center;
+  padding: 8px;
+  margin-bottom: 25px;
+  font-size: 18px;
+  font-weight: bold;
+  box-shadow: 0 5px 6px rgba(0, 0, 0, 0.409);
+}
+
 .closeButton {
   position: absolute;
-  top: 15px;
-  right: 15px;
+  top: 10px;
+  right: 10px;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -34,12 +52,13 @@
   align-items: center;
   justify-content: center;
   font-size: 1.2rem;
-  color: #fff;
+  color: black;
+  transition: 1.2s ease;
 }
 
 .closeButton:hover {
   background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 50%;
+  transform: rotate(360deg);
 }
 
 .blockBorder {
@@ -56,9 +75,9 @@
 
 .titleModal {
   color: #333333;
-  font-size: 2rem;
+  font-size: 28px;
   font-weight: bold;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .titleText {
@@ -69,14 +88,11 @@
   margin-bottom: 15px;
 }
 
-.seatingChart {
-  margin: 25px 0;
-}
 
 .row {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
-  grid-template-rows: repeat(5, 1fr);
+  grid-template-rows: repeat(6, 1fr);
   justify-content: center;
   max-width: 500px;
 }
@@ -118,7 +134,7 @@
 
   width: 100%;
   padding: 0 15px;
-  margin-top: 15px;
+  margin-top: 30px;
 }
 
 .priceContainer {
@@ -127,6 +143,7 @@
 
 .bookButton {
   padding: 12px 28px;
+  height: 40px;
   background: #0c0c0c;
   color: rgb(227, 227, 227);
   font-size: 16px;
@@ -144,14 +161,19 @@
 }
 
 @media (max-width: 768px) {
+  .screen {
+    margin-bottom: 0;
+    font-size: 16px;
+  }
+
   .titleModal {
-    font-size: 28px;
-    margin: 0;
-    padding: 0;
+    font-size: 25px;
+    margin-bottom: 10px;
   }
 
   .titleText {
     margin: 15px 0;
+    font-size: 18px;
   }
 
   .blockBorder {
@@ -172,14 +194,18 @@
 }
 
 @media (max-width: 550px) {
+  .screen {
+    height: 30px;
+    font-size: 14px;
+  }
+
   .titleModal {
-    font-size: 28px;
-    margin: 0;
-    padding: 0;
+    font-size: 22px;
   }
 
   .titleText {
     margin: 10px 0;
+    font-size: 14px;
   }
 
   .blockBorder {
@@ -192,9 +218,15 @@
     font-size: 12px;
   }
 
+  .modalBottom {
+    flex-direction: column;
+    gap: 10px;
+  }
+
   .bookButton {
-    padding: 10px 24px;
-    font-size: 14px;
+    width: 100%;
+    font-size: 17px;
+    letter-spacing: 2px;
     margin: 0;
   }
 }
