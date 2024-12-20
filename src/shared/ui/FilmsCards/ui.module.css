@@ -55,7 +55,7 @@
   border: none;
   padding: 10px 24px;
   cursor: pointer;
-  border-radius: 8px;
+  border-radius: 10px;
   font-size: 16px;
   transition: background-color 0.3s ease;
 }
@@ -78,7 +78,7 @@
 .dropdownItem {
   padding: 8px 14px;
   cursor: pointer;
-  background-color: rgba(0, 0, 0, 0.669);
+  background-color: rgba(0, 0, 0, 0.592);
   backdrop-filter: blur(5px);
   letter-spacing: 1px;
   color: #5c1d77;
@@ -279,6 +279,17 @@
 }
 
 @media (max-width: 511px) {
+  .container {
+    margin-top: 0;
+  }
+
+  .dropdownButton {
+    width: 110px;
+    height: 43px;
+    border-radius: 18px;
+    font-size: 15px;
+  }
+
   .cardList {
     gap: 25px;
   }

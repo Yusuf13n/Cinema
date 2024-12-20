@@ -52,7 +52,14 @@ const initialState: SeatsState = {
     { id: 'E6', isBooked: false, isSelected: false },
     { id: 'E7', isBooked: false, isSelected: false },
     { id: 'E8', isBooked: false, isSelected: false },
-    
+    { id: 'F1', isBooked: false, isSelected: false },
+    { id: 'F2', isBooked: false, isSelected: false },
+    { id: 'F3', isBooked: false, isSelected: false },
+    { id: 'F4', isBooked: false, isSelected: false },
+    { id: 'F5', isBooked: false, isSelected: false },
+    { id: 'F6', isBooked: false, isSelected: false },
+    { id: 'F7', isBooked: false, isSelected: false },
+    { id: 'F8', isBooked: false, isSelected: false },
   ],
 };
 

@@ -14,7 +14,7 @@
   color: transparent;
   text-transform: uppercase;
   letter-spacing: 2px;
-  -webkit-text-stroke: 2px #7f0b8c;
+  -webkit-text-stroke: 2px #5c1d77;
 }
 .logoContainer a {
   text-decoration: none;
@@ -154,13 +154,13 @@
 }
 
 .navList li ul li a:hover {
-  color: #9615a4;
+  color: #5c1d77;
 }
 
 .loginButton {
-  padding: 10px 28px;
+  padding: 9px 28px;
   color: #cfcfcf;
-  border: 2px solid #5a0c63;
+  border: 2px solid #5c1d77;
   border-radius: 8px;
   font-size: 16px;
   letter-spacing: 2px;
@@ -170,8 +170,8 @@
 }
 
 .loginButton:hover {
-  background-color: #5a0c63;
-  box-shadow: 0 0 15px #8a1897;
+  background-color: #5c1d77;
+  box-shadow: 0 0 15px #5c1d77;
   color: #fff;
 }
 

@@ -1,5 +1,5 @@
 .carousel {
-  height: 550px;
+  height: 650px;
   width: 90%;
   margin: 0 auto;
   border-radius: 15px;
@@ -42,6 +42,18 @@
   50% {
     transform: scale(1);
     filter: brightness(0.9);
+  }
+}
+
+@media (max-width: 1300px) {
+  .carousel {
+    height: 550px;
+  }
+}
+
+@media (max-width: 1090px) {
+  .carousel {
+    height: 450px;
   }
 }
 
