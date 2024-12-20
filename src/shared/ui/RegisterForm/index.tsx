@@ -11,9 +11,7 @@ import { Button, message } from "antd";
 
 import style from "./ui.module.css";
 
-export const Register: React.FC<{ switchForm: () => void }> = ({
-  switchForm,
-}) => {
+export const Register: React.FC<{ switchForm: () => void }> = ({ switchForm }) => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
