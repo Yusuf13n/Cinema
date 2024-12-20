@@ -1,22 +1,13 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
-import { db, auth } from "../../shared/consts/firebase/firebase.config";
-import {
-  collection,
-  addDoc,
-  query,
-  where,
-  onSnapshot,
-} from "firebase/firestore";
-import { User, onAuthStateChanged } from "firebase/auth";
-import { useAppDispatch, useAppSelector } from "../../hooks";
+import { useAppSelector } from "../../hooks";
 import { useEffect, useState } from "react";
-import { fetchItems } from "../../redux/slices/filmsSlice";
-
+import { collection, query, where, getDocs, addDoc, deleteDoc, doc } from "firebase/firestore"; // Импорт Firestore методов
 import style from "./ui.module.css";
+import { db } from "@/shared/consts/firebase/firebase.config";
 
-interface Reviev {
+interface Review {
   review: string;
   userName: string;
   userEmail: string;
@@ -28,53 +19,37 @@ interface HandleOpenProps {
 
 export const FilmDetailPage = ({ handleOpen }: HandleOpenProps) => {
   const { id } = useParams<{ id: string }>();
-  const [reviews, setReviews] = useState<Reviev[]>([]);
+  const [reviews, setReviews] = useState<Review[]>([]);
   const [newReview, setNewReview] = useState<string>("");
 
   const user = useAppSelector((state) => state.auth.user);
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const film = useSelector((state: RootState) =>
     state.films.films.find((film) => film.id === parseInt(id || "", 10))
   );
 
+  // Загружаем отзывы из Firestore при монтировании компонента
   useEffect(() => {
-    dispatch(fetchItems());
-  }, [dispatch]);
+    if (!id) return;
 
-  useEffect(() => {
-    if (id) {
-      const reviewsCollection = collection(db, "reviews");
-      const q = query(reviewsCollection, where("filmId", "==", id));
-
-      const unsubscribe = onSnapshot(q, (querySnapshot) => {
-        const reviewsData: {
-          review: string;
-          userName: string;
-          userEmail: string;
-        }[] = [];
+    const fetchReviews = async () => {
+      try {
+        const reviewsRef = collection(db, "reviews");
+        const q = query(reviewsRef, where("filmId", "==", id));
+        const querySnapshot = await getDocs(q);
+        const reviewsList: Review[] = [];
         querySnapshot.forEach((doc) => {
-          reviewsData.push(
-            doc.data() as {
-              review: string;
-              userName: string;
-              userEmail: string;
-            }
-          );
+          reviewsList.push(doc.data() as Review); 
         });
-        setReviews(reviewsData);
-      });
+        setReviews(reviewsList);
+      } catch (error) {
+        console.error("Error fetching reviews: ", error);
+      }
+    };
 
-      return () => unsubscribe();
-    }
+    fetchReviews();
   }, [id]);
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, () => {});
-
-    return () => unsubscribe();
-  }, []);
 
   const handleAddReview = async () => {
     if (!newReview.trim()) {
@@ -82,25 +57,29 @@ export const FilmDetailPage = ({ handleOpen }: HandleOpenProps) => {
       return;
     }
 
-    try {
-      if (!user) {
-        alert("Вы должны быть авторизованы, чтобы оставить отзыв!");
-        return;
-      }
+    if (!user) {
+      alert("Вы должны быть авторизованы, чтобы оставить отзыв!");
+      return;
+    }
 
+    const newReviewObj: Review = {
+      review: newReview,
+      userName: user.name || "Anonymous",
+      userEmail: user.email || "",
+    };
+
+    try {
       await addDoc(collection(db, "reviews"), {
         filmId: id,
-        review: newReview,
-        userEmail: user.email || "",
-        userName: user?.name || "Anonymous",
-        timestamp: new Date(),
+        ...newReviewObj,
       });
-
+      setReviews((prevReviews) => [...prevReviews, newReviewObj]); 
       setNewReview("");
     } catch (error) {
       console.error("Error adding review: ", error);
     }
   };
+
 
   const handleLogin = () => {
     navigate("/Auth");
@@ -144,7 +123,7 @@ export const FilmDetailPage = ({ handleOpen }: HandleOpenProps) => {
       </div>
 
       <div className={style.reviewBlock}>
-        <h3>Leave your review:</h3>
+        <h3 className={style.titleRevievCard}>Leave your review:</h3>
         {user ? (
           <div className={style.reviewSection}>
             <textarea
@@ -166,17 +145,20 @@ export const FilmDetailPage = ({ handleOpen }: HandleOpenProps) => {
 
         <div className={style.reviews}>
           <h3>User reviews:</h3>
-          {reviews.length === 0 ? (
-            <p>Be the first to review !</p>
-          ) : (
-            reviews.map((review, index) => (
-              <div key={index} className={style.reviewCard}>
-                <p>{review.userName}</p>
-                <p>{review.review}</p>
-              </div>
-            ))
-          )}
+          <div className={style.blockReviewCard}>
+            {reviews.length === 0 ? (
+              <p>Be the first to review!</p>
+            ) : (
+              reviews.map((review, index) => (
+                <div key={index} className={style.reviewCard}>
+                  <p>{review.userName}</p>
+                  <p>{review.review}</p>
+                </div>
+              ))
+            )}
+          </div>
         </div>
+
       </div>
     </div>
   );

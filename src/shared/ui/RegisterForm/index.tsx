@@ -21,7 +21,7 @@ export const Register: React.FC<{ switchForm: () => void }> = ({
   const dispatch = useAppDispatch();
   const { loading, error } = useAppSelector((state) => state.auth);
 
-  const [messageApi, contextHolder] = message.useMessage();
+  const [messageApi] = message.useMessage();
   const key = "updatable";
 
   const openMessage = () => {
