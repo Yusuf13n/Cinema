@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import { collection, query, where, getDocs, addDoc, deleteDoc, doc } from "firebase/firestore"; // Импорт Firestore методов
 import style from "./ui.module.css";
 import { db } from "@/shared/consts/firebase/firebase.config";
+import { Rate } from "antd";
+
 
 interface Review {
   review: string;
@@ -101,6 +103,7 @@ export const FilmDetailPage = ({ handleOpen }: HandleOpenProps) => {
           <p className={style.rating}>Rating: {film.rating}</p>
           <p className={style.restrictions}>{film.restrictions}</p>
           <p className={style.description}>{film.description}</p>
+          <Rate className={style.rate} allowHalf defaultValue={2.5} />
           <button
             className={style.ticketsButton}
             onClick={() => handleOpen(film.title)}

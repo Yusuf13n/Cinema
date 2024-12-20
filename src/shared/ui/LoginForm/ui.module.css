@@ -2,16 +2,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 100vh;
+  padding: 20px; 
 }
 
 .formBlock {
   backdrop-filter: blur(10px);
-  padding: 60px;
+  padding: 60px; 
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.577);
   width: 100%;
   max-width: 400px;
-  
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,17 +31,17 @@
   }
 }
 
-h1 {
+.titleLogin {
   text-align: center;
   color: #cbcbcb;
   letter-spacing: 1px;
-  margin-bottom: 40px;
+  margin-bottom: 30px; 
 }
 
 .inputGroup {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 15px; 
   width: 100%;
   padding: 10px;
   border-radius: 5px;
@@ -64,10 +65,10 @@ h1 {
 
 .btnWrapper {
   width: 100%;
-  margin-top: 10px;
+  margin-top: 20px; 
 }
 
-.btn {
+.btnLogin {
   width: 100%;
   height: 45px;
   font-size: 16px;
@@ -77,15 +78,49 @@ h1 {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: 0.3s;
 }
 
-.btn:disabled {
+.btnLogin:disabled {
   background-color: #b0c4de;
 }
 
-.btn:hover {
+.btnLogin:hover {
   background-color: #9d1fab;
+}
+
+.authIconBottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px; 
+  margin-top: 20px;
+  width: 100%;
+}
+
+.authIconBottom button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 5px 15px;
+  background-color: rgba(255, 255, 255, 0.789);
+  color: #000000;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.4s ease;
+}
+
+.authIconBottom button:hover {
+  opacity: 0.7;
+}
+
+.authIconBottom img {
+  height: 24px;
+  width: 24px;
+  margin-right: 8px;
 }
 
 .switchText {
@@ -102,10 +137,55 @@ h1 {
 
 .switchText span:hover {
   text-decoration: underline;
+  color: #7f0b8c;
 }
 
 .errorText {
+  position: absolute;
+  bottom: 47%;
+  font-size: 14px;
   text-align: center;
   color: red;
   margin-top: 15px;
+}
+
+.paragraph {
+  text-align: center; 
+  margin: 20px 0;
+  color: rgb(147, 147, 147);
+}
+
+@media (max-width: 480px) {
+  .formBlock {
+    padding: 50px;
+  }
+
+  .titleLogin {
+    font-size: 26px;
+  }
+
+  .input {
+    font-size: 14px; 
+  }
+
+  .btn {
+    height: 40px; 
+  }
+
+  .authIconBottom {
+    gap: 15px;
+  }
+
+  .authIconBottom button {
+    padding: 5px 10px;
+  }
+
+  .authIconBottom img {
+    height: 20px; 
+    width: 20px; 
+  }
+
+  .errorText {
+    bottom: 48%;
+  }
 }

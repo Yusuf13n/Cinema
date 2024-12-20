@@ -1,18 +1,17 @@
 import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { useNavigate } from "react-router-dom";
-import { User, updateProfile } from "firebase/auth"; // Импортируем updateProfile
+import { User, updateProfile, signInWithPopup } from "firebase/auth";
 import { loginFailure, loginReqest, loginSicces } from "../../../redux/slices/authSlice";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faKey, faAt } from "@fortawesome/free-solid-svg-icons";
-import { auth } from "@/shared/consts/firebase/firebase.config";
+import { auth, googleProvider } from "@/shared/consts/firebase/firebase.config";
 import { Button, message } from "antd";
+
 import style from "./ui.module.css";
 
-export const Register: React.FC<{ switchForm: () => void }> = ({
-  switchForm,
-}) => {
+export const Register: React.FC<{ switchForm: () => void }> = ({ switchForm }) => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -21,23 +20,16 @@ export const Register: React.FC<{ switchForm: () => void }> = ({
   const dispatch = useAppDispatch();
   const { loading, error } = useAppSelector((state) => state.auth);
 
-  const [messageApi] = message.useMessage();
+  const [messageApi, contextHolder] = message.useMessage();
   const key = "updatable";
 
-  const openMessage = () => {
+  const openMessage = (type: "success" | "error", content: string) => {
     messageApi.open({
       key,
-      type: "loading",
-      content: "Loading...",
+      type,
+      content,
+      duration: 2,
     });
-    setTimeout(() => {
-      messageApi.open({
-        key,
-        type: "success",
-        content: "Loaded!",
-        duration: 2,
-      });
-    }, 2000);
   };
 
   const enterLoading = (index: number) => {
@@ -59,10 +51,7 @@ export const Register: React.FC<{ switchForm: () => void }> = ({
   const hanleClickLoad = () => {
     enterLoading(0);
     handleRegister();
-    openMessage();
   };
-
-  const navigate = useNavigate();
 
   const handleRegister = async () => {
     dispatch(loginReqest());
@@ -74,7 +63,6 @@ export const Register: React.FC<{ switchForm: () => void }> = ({
       );
 
       if (userCredential.user) {
-        // Используем updateProfile из firebase/auth
         await updateProfile(userCredential.user, {
           displayName: name,
         });
@@ -83,9 +71,12 @@ export const Register: React.FC<{ switchForm: () => void }> = ({
       dispatch(
         loginSicces({ email: userCredential.user.email || "", name: name })
       );
-      navigate("/");
+      openMessage("success", "Registration successful!");
+      setTimeout(() => {
+      }, 2500);
     } catch (err: any) {
       dispatch(loginFailure(err.message));
+      openMessage("error", "Error during registration. Please try again.");
     }
   };
 
@@ -124,6 +115,7 @@ export const Register: React.FC<{ switchForm: () => void }> = ({
           />
         </div>
         <div className={style.btnWrapper}>
+          {contextHolder}
           <Button
             type="primary"
             className={style.btn}
@@ -131,7 +123,7 @@ export const Register: React.FC<{ switchForm: () => void }> = ({
             onClick={hanleClickLoad}
             disabled={loading}
           >
-            {loading ? "Sign up..." : "Sign in"}
+            {loading ? "Sign up" : "Sign in"}
           </Button>
         </div>
         <p className={style.switchText}>

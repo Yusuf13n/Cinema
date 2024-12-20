@@ -66,7 +66,12 @@ export const Header = () => {
       <div className={style.actionsContainer}>
         <div className={style.loginButtonContainer}>
           {!user ? (
-            <button className={style.loginButton} onClick={handleOpenLogin}>
+            <button
+              className={style.loginButton}
+              onClick={() => {
+                handleOpenLogin();
+              }}
+            >
               Log in
             </button>
           ) : (
