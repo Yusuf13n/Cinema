@@ -16,7 +16,7 @@ export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleOpenLogin = () => {
-    navigate("/auth");
+    navigate("/Auth", { state: { from: location.pathname } });
   };
 
   const handleLogout = async () => {
@@ -57,9 +57,7 @@ export const Header = () => {
             </a>
           </li>
           <li>
-            <a href="#" onClick={(e) => e.preventDefault()}>
-              Contact
-            </a>
+            <Link to="/Contacts">Contact</Link>
           </li>
         </ul>
       </nav>

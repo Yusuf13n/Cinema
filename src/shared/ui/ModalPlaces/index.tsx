@@ -10,6 +10,8 @@ import { MdClose } from "react-icons/md";
 import { db } from "../../consts/firebase/firebase.config";
 import { collection, doc, updateDoc, onSnapshot } from "firebase/firestore";
 import { Button, notification } from "antd";
+import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from "react-datepicker";
 
 interface handleCloseProps {
   handleClose: () => void;
@@ -21,6 +23,7 @@ const ticketPrice = 250;
 export const Modal = ({ handleClose, title }: handleCloseProps) => {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const dispatch = useAppDispatch();
   const seats = useAppSelector((state) => state.seats.seats);
 
@@ -40,6 +43,14 @@ export const Modal = ({ handleClose, title }: handleCloseProps) => {
   };
 
   const handleBooking = () => {
+    if (!selectedDate) {
+      api.open({
+        message: "No date selected 📅",
+        description: "Please select a date to proceed with the reservation.",
+      });
+      return;
+    }
+
     const selectedSeats = seats.filter((seat) => seat.isSelected);
     if (selectedSeats.length > 0) {
       setShowConfirmation(true);
@@ -90,6 +101,8 @@ export const Modal = ({ handleClose, title }: handleCloseProps) => {
             <MdClose size={24} />
           </button>
           <h2 className={style.titleModal}>Movie: {title}</h2>
+
+
           <div className={style.screen}>
             <h3>Screen</h3>
           </div>
@@ -113,6 +126,17 @@ export const Modal = ({ handleClose, title }: handleCloseProps) => {
                 </button>
               ))}
             </div>
+          </div>
+          <div className={style.datePickerContainer}>
+            <h3>Select Date:</h3>
+            <DatePicker
+              selected={selectedDate}
+              onChange={(date) => setSelectedDate(date)}
+              minDate={new Date()}
+              dateFormat="MMMM d, yyyy"
+              placeholderText="Select a date"
+              className={style.customDatePicker}
+            />
           </div>
           <div className={style.modalBottom}>
             <div className={style.priceContainer}>

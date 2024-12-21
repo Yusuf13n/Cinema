@@ -75,28 +75,36 @@ export const FilmsCards = () => {
             <button className={style.dropdownButton} onClick={toggleDropdown}>
               Rating
             </button>
-            {dropdownOpen && (
-              <ul className={style.dropdownMenu}>
-                <li
-                  className={style.dropdownItem}
-                  onClick={() => selectSortOrder("asc")}
-                >
-                  Ascending
-                </li>
-                <li
-                  className={style.dropdownItem}
-                  onClick={() => selectSortOrder("desc")}
-                >
-                  Descending
-                </li>
-                <li
-                  className={style.dropdownItem}
-                  onClick={() => selectSortOrder("none")}
-                >
-                  Stock
-                </li>
-              </ul>
-            )}
+            <ul
+              className={`${style.dropdownMenu} ${
+                dropdownOpen ? style.open : ""
+              }`}
+            >
+              <li
+                className={`${style.dropdownItem} ${
+                  sortOrder === "asc" ? style.active : ""
+                }`}
+                onClick={() => selectSortOrder("asc")}
+              >
+                Ascending
+              </li>
+              <li
+                className={`${style.dropdownItem} ${
+                  sortOrder === "desc" ? style.active : ""
+                }`}
+                onClick={() => selectSortOrder("desc")}
+              >
+                Descending
+              </li>
+              <li
+                className={`${style.dropdownItem} ${
+                  sortOrder === "none" ? style.active : ""
+                }`}
+                onClick={() => selectSortOrder("none")}
+              >
+                Default
+              </li>
+            </ul>
           </div>
         </div>
       </div>

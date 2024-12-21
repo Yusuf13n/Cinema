@@ -61,6 +61,28 @@
   transform: rotate(360deg);
 }
 
+.customDatePicker {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #f9f9f9, #ffffff);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center; 
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.customDatePicker::placeholder {
+  text-align: center; 
+  color: #aaaaaa; 
+}
+
+.customDatePicker:focus {
+  outline: none;
+  border-color: #000000;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.4);
+}
 .blockBorder {
   border-radius: 12px;
   box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.205);

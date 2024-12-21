@@ -11,7 +11,8 @@
   padding: 60px;
   width: 100%;
   max-width: 400px;
-  border-radius: 10px;
+  border-radius: 12px;
+  border: 6px solid #570a606d;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.577);
   display: flex;
   flex-direction: column;
@@ -43,9 +44,15 @@
   align-items: center;
   margin-bottom: 15px;
   width: 100%;
-  padding: 10px;
-  border-radius: 5px;
-  background: #f9f9f9;
+  padding: 8px 12px;
+  border-bottom: 2px solid #cbcbcb;
+  color: white;
+  background: transparent;
+  position: relative;
+  transition: 0.5s ease;
+}
+.inputGroup:focus-within {
+  border-bottom: 2px solid #7f0b8c;
 }
 
 .input {
@@ -55,12 +62,31 @@
   font-size: 16px;
   padding: 3px;
   background: none;
-  color: #333;
+  color: #cbcbcb;
+}
+
+.input::placeholder {
+  color: #cbcbcb;
+}
+
+.eyeButton {
+  background: none;
+  border: none;
+  color: #cbcbcb;
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  font-size: 16px;
+  transition: 0.4s ease;
+}
+
+.eyeButton:hover {
+  color: #7f0b8c;
 }
 
 .icon {
   margin-right: 10px;
-  color: #666;
+  color: #afafaf;
 }
 
 .btnWrapper {
@@ -91,7 +117,7 @@
 
 .switchText {
   text-align: center;
-  color: #666;
+  color: rgb(165, 165, 165);
   margin-top: 15px;
 }
 
