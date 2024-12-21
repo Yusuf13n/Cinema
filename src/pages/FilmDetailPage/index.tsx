@@ -3,11 +3,11 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { useAppSelector } from "../../hooks";
 import { useEffect, useState } from "react";
+import { FaTicketAlt } from "react-icons/fa"; // Import Font Awesome ticket icon
 import { collection, query, where, getDocs, addDoc, deleteDoc, doc } from "firebase/firestore"; // Импорт Firestore методов
-import style from "./ui.module.css";
 import { db } from "@/shared/consts/firebase/firebase.config";
 import { Rate } from "antd";
-
+import style from "./ui.module.css";
 
 interface Review {
   review: string;
@@ -31,7 +31,8 @@ export const FilmDetailPage = ({ handleOpen }: HandleOpenProps) => {
     state.films.films.find((film) => film.id === parseInt(id || "", 10))
   );
 
-  // Загружаем отзывы из Firestore при монтировании компонента
+  const [expandedReviewIndex, setExpandedReviewIndex] = useState<number | null>(null);
+
   useEffect(() => {
     if (!id) return;
 
@@ -42,7 +43,7 @@ export const FilmDetailPage = ({ handleOpen }: HandleOpenProps) => {
         const querySnapshot = await getDocs(q);
         const reviewsList: Review[] = [];
         querySnapshot.forEach((doc) => {
-          reviewsList.push(doc.data() as Review); 
+          reviewsList.push(doc.data() as Review);
         });
         setReviews(reviewsList);
       } catch (error) {
@@ -55,7 +56,7 @@ export const FilmDetailPage = ({ handleOpen }: HandleOpenProps) => {
 
   const handleAddReview = async () => {
     if (!newReview.trim()) {
-      alert("Вы не можете оставить пустой отзыв!!!");
+      alert("Авторизуйся перед тем как жаловаться");
       return;
     }
 
@@ -75,21 +76,32 @@ export const FilmDetailPage = ({ handleOpen }: HandleOpenProps) => {
         filmId: id,
         ...newReviewObj,
       });
-      setReviews((prevReviews) => [...prevReviews, newReviewObj]); 
+      setReviews((prevReviews) => [...prevReviews, newReviewObj]);
       setNewReview("");
     } catch (error) {
       console.error("Error adding review: ", error);
     }
   };
 
-
   const handleLogin = () => {
-    navigate("/Auth");
+    navigate("/Auth", { state: { from: location.pathname } });
   };
 
   if (!film) {
     return <p>Loading...</p>;
   }
+
+  const truncateReview = (review: string) => {
+    const maxLength = 45;
+    if (review.length > maxLength) {
+      return review.slice(0, maxLength);
+    }
+    return review;
+  };
+
+  const toggleReviewExpand = (index: number) => {
+    setExpandedReviewIndex(expandedReviewIndex === index ? null : index);
+  };
 
   return (
     <div className={style.container}>
@@ -100,14 +112,21 @@ export const FilmDetailPage = ({ handleOpen }: HandleOpenProps) => {
 
         <div className={style.details}>
           <h1 className={style.title}>{film.title}</h1>
-          <p className={style.rating}>Rating: {film.rating}</p>
           <p className={style.restrictions}>{film.restrictions}</p>
+          <p className={style.rating}>Rating: {film.rating}</p>
           <p className={style.description}>{film.description}</p>
           <Rate className={style.rate} allowHalf defaultValue={2.5} />
           <button
             className={style.ticketsButton}
-            onClick={() => handleOpen(film.title)}
+            onClick={() => {
+              if (user) {
+                handleOpen(film.title);
+              } else {
+                handleLogin();
+              }
+            }}
           >
+            <FaTicketAlt style={{ marginRight: "8px" }} />
             Tickets
           </button>
 
@@ -126,42 +145,59 @@ export const FilmDetailPage = ({ handleOpen }: HandleOpenProps) => {
       </div>
 
       <div className={style.reviewBlock}>
-        <h3 className={style.titleRevievCard}>Leave your review:</h3>
-        {user ? (
-          <div className={style.reviewSection}>
-            <textarea
-              value={newReview}
-              onChange={(e) => setNewReview(e.target.value)}
-              placeholder="Write your review..."
-              className={style.reviewInput}
-            ></textarea>
-            <button onClick={handleAddReview} className={style.submitReviewBtn}>
-              Submit
-            </button>
-          </div>
-        ) : (
-          <div className={style.loginPrompt}>
-            <p>Log in to leave a review</p>
-            <button onClick={handleLogin}>Log in</button>
-          </div>
-        )}
-
         <div className={style.reviews}>
-          <h3>User reviews:</h3>
+          <h3>User Reviews:</h3>
           <div className={style.blockReviewCard}>
             {reviews.length === 0 ? (
               <p>Be the first to review!</p>
             ) : (
               reviews.map((review, index) => (
                 <div key={index} className={style.reviewCard}>
-                  <p>{review.userName}</p>
-                  <p>{review.review}</p>
+                  <p className={style.reviewUserName}>{review.userName}</p>
+                  <p className={style.reviewText}>
+                    {expandedReviewIndex === index
+                      ? review.review
+                      : truncateReview(review.review)}
+                  {review.review.length > 45 && (
+                    <button
+                      className={style.showMoreButton}
+                      onClick={() => toggleReviewExpand(index)}
+                    >
+                      {expandedReviewIndex === index ? "show less" : "more..."}
+                    </button>
+                  )}
+                  </p>
                 </div>
               ))
             )}
           </div>
         </div>
 
+        <div className={style.reviewSection}>
+          {user ? (
+            <>
+              <textarea
+                value={newReview}
+                onChange={(e) => setNewReview(e.target.value)}
+                placeholder="Write your review..."
+                className={style.reviewInput}
+              ></textarea>
+              <button
+                onClick={handleAddReview}
+                className={style.submitReviewBtn}
+              >
+                Submit
+              </button>
+            </>
+          ) : (
+            <div className={style.loginPrompt}>
+              <p>Log in to leave a review</p>
+              <button onClick={handleLogin} className={style.loginButton}>
+                Log in
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

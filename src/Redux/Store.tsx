@@ -3,14 +3,14 @@ import { filmsReducer } from "./slices/FilmsSlice";
 import { authReducer } from "./slices/authSlice";
 import { seatsReducer } from "./slices/seatsSlice";
 import { carouselReducer } from "./slices/HomeSlice";
-import { activePage } from "./slices/redirect";
+import pageSlice from "./slices/pageSlice";
 
 const rootReducer = combineReducers({
   films: filmsReducer,
   carousel: carouselReducer,
   auth: authReducer,
   seats: seatsReducer,
-  pages: activePage,
+  pages: pageSlice,
 });
 
 export const store = configureStore({

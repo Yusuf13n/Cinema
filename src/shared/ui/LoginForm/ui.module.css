@@ -3,22 +3,25 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding: 20px; 
+  padding: 20px;
 }
 
 .formBlock {
-  backdrop-filter: blur(10px);
-  padding: 60px; 
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.577);
-  width: 100%;
-  max-width: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  backdrop-filter: blur(10px);
+  padding: 60px;
+  border-radius: 12px;
+  border: 6px solid #570a606d;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.577);
+  width: 100%;
+  max-width: 400px;
   transition: 0.5s ease;
   animation: fadeIn 0.5s ease-in-out;
 }
+
 
 @keyframes fadeIn {
   from {
@@ -35,17 +38,23 @@
   text-align: center;
   color: #cbcbcb;
   letter-spacing: 1px;
-  margin-bottom: 30px; 
+  margin-bottom: 30px;
 }
 
 .inputGroup {
   display: flex;
   align-items: center;
-  margin-bottom: 15px; 
+  margin-bottom: 15px;
   width: 100%;
-  padding: 10px;
-  border-radius: 5px;
-  background: #f9f9f9;
+  padding: 8px 12px;
+  border-bottom: 2px solid #cbcbcb;
+  color: white;
+  background: transparent;
+  position: relative;
+  transition: 0.5s ease;
+}
+.inputGroup:focus-within {
+  border-bottom: 2px solid #7f0b8c;
 }
 
 .input {
@@ -55,17 +64,36 @@
   font-size: 16px;
   padding: 3px;
   background: none;
-  color: #333;
+  color: #cbcbcb;
+}
+
+.input::placeholder {
+  color: #cbcbcb;
+}
+
+.eyeButton {
+  background: none;
+  border: none;
+  color: #cbcbcb;
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  font-size: 16px;
+  transition: 0.4s ease;
+}
+
+.eyeButton:hover {
+  color: #7f0b8c;
 }
 
 .icon {
   margin-right: 10px;
-  color: #666;
+  color: #afafaf;
 }
 
 .btnWrapper {
   width: 100%;
-  margin-top: 20px; 
+  margin-top: 20px;
 }
 
 .btnLogin {
@@ -93,7 +121,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px; 
+  gap: 20px;
   margin-top: 20px;
   width: 100%;
 }
@@ -103,9 +131,9 @@
   align-items: center;
   justify-content: center;
 
-  padding: 5px 15px;
-  background-color: rgba(255, 255, 255, 0.789);
-  color: #000000;
+  padding: 8px 15px;
+  background-color: rgba(87, 87, 87, 0.254);
+  color: #d9d9d9;
   font-weight: 500;
   border: none;
   cursor: pointer;
@@ -114,18 +142,18 @@
 }
 
 .authIconBottom button:hover {
-  opacity: 0.7;
+  background-color: rgba(87, 87, 87, 0.55);
 }
 
 .authIconBottom img {
-  height: 24px;
-  width: 24px;
+  height: 22px;
+  width: 22px;
   margin-right: 8px;
 }
 
 .switchText {
   text-align: center;
-  color: #666;
+  color: rgb(165, 165, 165);
   margin-top: 15px;
 }
 
@@ -150,9 +178,9 @@
 }
 
 .paragraph {
-  text-align: center; 
+  text-align: center;
   margin: 20px 0;
-  color: rgb(147, 147, 147);
+  color: rgb(165, 165, 165);
 }
 
 @media (max-width: 480px) {
@@ -165,11 +193,11 @@
   }
 
   .input {
-    font-size: 14px; 
+    font-size: 14px;
   }
 
   .btn {
-    height: 40px; 
+    height: 40px;
   }
 
   .authIconBottom {
@@ -181,8 +209,8 @@
   }
 
   .authIconBottom img {
-    height: 20px; 
-    width: 20px; 
+    height: 20px;
+    width: 20px;
   }
 
   .errorText {

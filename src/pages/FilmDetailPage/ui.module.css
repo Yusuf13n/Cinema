@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-
   padding: 40px;
   color: #ffffff;
 }
@@ -48,6 +47,7 @@
   font-size: 1.2rem;
   color: #cccccc;
   margin-bottom: 10px;
+  text-align: start;
 }
 
 .restrictions {
@@ -73,7 +73,7 @@
 }
 
 .ticketsButton {
-  width: 120px;
+  width: 140px;
   height: 42px;
   margin-top: 10px;
   font-size: 17px;
@@ -84,7 +84,15 @@
   border: none;
   cursor: pointer;
   transition: 0.4s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+.ticketsButton svg {
+  font-size: 20px;
+}
+
 .ticketsButton:hover {
   opacity: 0.8;
 }
@@ -114,101 +122,139 @@ iframe {
 .reviewBlock {
   padding: 20px;
   width: 500px;
-  margin-top: 100px;
+  margin-top: 70px;
+  margin-right: 50%;
   background: transparent;
   border-radius: 10px;
   border: 2px solid #5c1d77;
-  box-shadow: 0 0 20px rgba(92, 29, 119, 0.5);
   color: #ffffff;
-  position: relative;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
 }
 
-.reviewBlock {
-  flex: 1 1 40%;
+.reviews {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.blockReviewCard {
+  height: 330px;
+  padding-right: 10px;
+}
+
+.reviewCard {
+  background: rgba(0, 0, 0, 0.298);
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 10px;
+  border: 1px solid #5c1d77;
+  box-shadow: 0 0 15px rgba(92, 29, 119, 0.3);
+  color: #e0e0ff;
+  font-size: 1rem;
+  position: relative;
+}
+
+.reviewCard .reviewUserName {
+  font-weight: bold;
+  font-size: 16px;
+  color: #9236ba;
+}
+
+.reviewCard .reviewText {
+  margin-top: 5px;
+  font-size: 14pxrem;
 }
 
 .reviewSection {
   width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+
+.titleRevievCard {
+  font-size: 22px;
+  color: #fff;
+  margin-bottom: 15px;
 }
 
 .reviewInput {
   width: 100%;
-  padding: 10px;
-  border: 2px solid #5c1d77;
+  padding: 4px 10px;
   border-radius: 10px;
   background: #2a1e4d;
-  color: #ffffff;
+  color: #fff;
+  font-size: 15px;
   resize: none;
-  margin-bottom: 15px;
   box-shadow: 0 0 10px rgba(92, 29, 119, 0.5);
+  margin-bottom: 10px;
 }
 
 .reviewInput::placeholder {
   color: #a69cb5;
+  font-size: 15px;
 }
 
 .submitReviewBtn {
-  padding: 10px 15px;
   background-color: #5c1d77;
   color: white;
-  border: none;
+  padding: 8px;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s;
   box-shadow: 0 0 10px rgba(92, 29, 119, 0.5);
+  border: none;
+  width: 100%;
+  font-size: 18px;
+  letter-spacing: 1px;
+  margin-top: 10px;
+  transition: background-color 0.3s;
 }
 
 .submitReviewBtn:hover {
   background-color: #7d259d;
 }
 
-.reviews {
-  width: 100%;
-  max-width: 600px;
-  margin-top: 20px;
-  padding: 20px;
-  background: #2a1e4d;
-  border-radius: 10px;
-  border: 2px solid #5c1d77;
-  box-shadow: 0 0 15px rgba(92, 29, 119, 0.5);
-  color: #ffffff;
-}
-
-.reviewCard {
-  background: rgba(0, 0, 0, 0.6);
-  padding: 15px;
-  margin: 10px auto;
-  border-radius: 8px;
-  border: 1px solid #5c1d77;
-  box-shadow: 0 0 10px rgba(92, 29, 119, 0.3);
-  color: #e0e0ff;
-  font-size: 0.9rem;
-}
-
-.reviewCard p {
-  margin: 0;
-  font-size: 1rem;
-}
-
 .loginPrompt {
-  margin-top: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 15px;
+  border-radius: 10px;
   text-align: center;
+  width: 100%;
+  margin-top: 15px;
 }
 
-.loginPrompt button {
-  padding: 10px 20px;
+.loginPrompt p {
+  margin: 0;
+  font-size: 16px;
+  color: #fff;
+}
+
+.showMoreButton {
+  background-color: transparent;
+  color: #702890;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0;
+}
+
+.loginButton {
   background-color: #5c1d77;
   color: white;
-  border: none;
-  border-radius: 5px;
+  padding: 12px;
+  border-radius: 8px;
   cursor: pointer;
+  box-shadow: 0 0 10px rgba(92, 29, 119, 0.5);
+  border: none;
+  width: 100%;
+  font-size: 18px;
+  letter-spacing: 1px;
+  margin-top: 10px;
   transition: background-color 0.3s;
 }
 
-.loginPrompt button:hover {
+.loginButton:hover {
   background-color: #7d259d;
 }
 

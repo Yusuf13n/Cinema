@@ -1,89 +1,65 @@
 import React, { useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { useNavigate } from "react-router-dom";
-import { User, updateProfile, signInWithPopup } from "firebase/auth";
+import { useAppDispatch, useAppSelector } from "../../../hooks";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { loginFailure, loginReqest, loginSicces } from "../../../redux/slices/authSlice";
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faKey, faAt } from "@fortawesome/free-solid-svg-icons";
-import { auth, googleProvider } from "@/shared/consts/firebase/firebase.config";
+import { faUser, faKey, faAt, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { Button, message } from "antd";
-
+import { auth } from "@/shared/consts/firebase/firebase.config";
 import style from "./ui.module.css";
 
 export const Register: React.FC<{ switchForm: () => void }> = ({ switchForm }) => {
-  const [name, setName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [loadings, setLoadings] = useState<boolean[]>([]);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false); 
 
   const dispatch = useAppDispatch();
-  const { loading, error } = useAppSelector((state) => state.auth);
+  const navigate = useNavigate();
+  const { error } = useAppSelector((state) => state.auth);
 
   const [messageApi, contextHolder] = message.useMessage();
-  const key = "updatable";
 
   const openMessage = (type: "success" | "error", content: string) => {
     messageApi.open({
-      key,
       type,
       content,
       duration: 2,
     });
   };
 
-  const enterLoading = (index: number) => {
-    setLoadings((prevLoadings) => {
-      const newLoadings = [...prevLoadings];
-      newLoadings[index] = true;
-      return newLoadings;
-    });
+  const actualPage = useAppSelector((state) => state.pages.page || "/");
 
-    setTimeout(() => {
-      setLoadings((prevLoadings) => {
-        const newLoadings = [...prevLoadings];
-        newLoadings[index] = false;
-        return newLoadings;
-      });
-    }, 2000);
-  };
+const handleRegister = async () => {
+  dispatch(loginReqest());
+  setLoading(true);
 
-  const hanleClickLoad = () => {
-    enterLoading(0);
-    handleRegister();
-  };
+  try {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
 
-  const handleRegister = async () => {
-    dispatch(loginReqest());
-    try {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-
-      if (userCredential.user) {
-        await updateProfile(userCredential.user, {
-          displayName: name,
-        });
-      }
-
-      dispatch(
-        loginSicces({ email: userCredential.user.email || "", name: name })
-      );
-      openMessage("success", "Registration successful!");
-      setTimeout(() => {
-      }, 2500);
-    } catch (err: any) {
-      dispatch(loginFailure(err.message));
-      openMessage("error", "Error during registration. Please try again.");
+    if (userCredential.user) {
+      await updateProfile(userCredential.user, { displayName: name });
     }
-  };
+
+    dispatch(loginSicces({ email: userCredential.user.email || "", name }));
+    openMessage("success", "Registration successful!");
+    setTimeout(() => {
+      navigate(actualPage); // Возвращаем на сохраненную страницу
+    }, 2500);
+  } catch (err: any) {
+    dispatch(loginFailure(err.message));
+    openMessage("error", "Error during registration. Please try again.");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className={style.container}>
       <div className={style.formBlock}>
-        <h1 className={style.titleRegister}>Sign in</h1>
+        <h1 className={style.titleRegister}>Sign up</h1>
         <div className={style.inputGroup}>
           <FontAwesomeIcon icon={faUser} className={style.icon} />
           <input
@@ -98,7 +74,7 @@ export const Register: React.FC<{ switchForm: () => void }> = ({ switchForm }) =
           <FontAwesomeIcon icon={faAt} className={style.icon} />
           <input
             className={style.input}
-            type="text"
+            type="email"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -108,22 +84,29 @@ export const Register: React.FC<{ switchForm: () => void }> = ({ switchForm }) =
           <FontAwesomeIcon icon={faKey} className={style.icon} />
           <input
             className={style.input}
-            type="password"
+            type={showPassword ? "text" : "password"}
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          <button
+            type="button"
+            className={style.eyeButton}
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+          </button>
         </div>
         <div className={style.btnWrapper}>
           {contextHolder}
           <Button
             type="primary"
             className={style.btn}
-            loading={loadings[0]}
-            onClick={hanleClickLoad}
+            loading={loading}
+            onClick={handleRegister}
             disabled={loading}
           >
-            {loading ? "Sign up" : "Sign in"}
+            Sign up
           </Button>
         </div>
         <p className={style.switchText}>

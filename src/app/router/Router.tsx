@@ -4,6 +4,7 @@ import { useState } from "react";
 import { FilmDetailPage } from "@/pages/FilmDetailPage";
 import { AuthenticationPage } from "@/pages/AuthenticationPage";
 import { HomePage } from "@/pages/HomePage";
+import { Contacts } from "@/pages/ContactsPage";
 
 export const Router = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -32,6 +33,7 @@ export const Router = () => {
         }
       />
       <Route path="/Auth" element={<AuthenticationPage />} />
+      <Route path="/Contacts" element={<Contacts />} />
     </Routes>
   );
 };

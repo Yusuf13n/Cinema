@@ -14,11 +14,21 @@
 .modal {
   background: #fff;
   border-radius: 12px;
-  width: 400px;
-  padding: 25px;
+  width: 450px;
+  padding: 30px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   position: relative;
   text-align: center;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .closeButton {
@@ -38,23 +48,40 @@
 }
 
 .title {
-  font-size: 24px;
+  font-size: 26px;
   color: #333;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .description {
-  font-size: 14px;
+  font-size: 16px;
   color: #666;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .infoIcon {
-  margin-right: 8px;
+  margin-right: 10px;
   color: #007bff;
+}
+
+.paymentIcons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.paymentIcon {
+  color: #007bff;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.paymentIcon:hover {
+  transform: scale(1.1);
 }
 
 .form {
@@ -63,27 +90,27 @@
 }
 
 .formGroup {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   position: relative;
 }
 
 .label {
   display: block;
-  margin-bottom: 5px;
-  font-size: 14px;
+  margin-bottom: 8px;
+  font-size: 16px;
   color: #333;
 }
 
 .formRow {
   display: flex;
-  gap: 15px;
+  gap: 20px;
 }
 
 .input {
   width: 100%;
-  padding: 10px 40px 10px 10px;
+  padding: 12px 20px;
+  border-radius: 8px;
   border: 1px solid #ccc;
-  border-radius: 4px;
   font-size: 16px;
   position: relative;
   box-sizing: border-box;
@@ -96,39 +123,57 @@
 }
 
 .icon {
-  position: absolute;
-  left: 10px;
-  top: 50%;
-  transform: translateY(-50%);
   color: #888;
 }
 
 .submitButton {
-  background-color: #007bff;
+  background-color: #1d1d1d;
   color: #fff;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
+  padding: 14px 22px;
+  border-radius: 8px;
+  font-size: 18px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.4s ease;
 }
 
 .submitButton:hover {
   background-color: #0056b3;
 }
 
-.openButton {
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+.submitButton:active {
+  background-color: #003f7f;
 }
 
-.openButton:hover {
-  background-color: #0056b3;
+.dateInputWrapper {
+  position: relative;
+}
+
+.inputDate {
+  width: 100%;
+  padding: 12px 40px 12px 20px; 
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  box-sizing: border-box;
+  appearance: none;
+  background-color: #fff;
+}
+
+.inputDate:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.inputDate::before {
+  content: "\f133"; 
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #888;
+  pointer-events: none;
 }
